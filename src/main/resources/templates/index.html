@@ -1,0 +1,357 @@
+ <!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+      <title>Student Menu</title>
+    <style>
+        a.button {
+            -webkit-appearance: button;
+            -moz-appearance: button;
+            appearance: button;
+
+            text-decoration: none;
+            color: initial;
+        }
+        .btn-default{
+            width:180px;
+            height:60px;
+        }
+        .container{
+            padding: 20px;
+        }
+        .wrapper{
+            display:grid;
+
+            grid-template-columns: 85% 15%;
+            grid-column-gap: 1 em;
+        }
+        input{
+            width: 200px;
+            height: 50px;
+            border-radius: 5px;
+            margin: 0 auto;
+        }
+        table{
+            height: 100px;
+            width: 100%;
+            margin: auto;
+            text-align: center;
+            table-layout: fixed;
+            font-size: 5px;
+        }
+        table,tr,th,td{
+
+            padding:20px;
+            color:white;
+            border:1px solid #080808;
+            border-collapse: collapse;
+            font-size: 18px;
+            font-family: Arial;
+            background: linear-gradient(top, #3c3c3c 0%, #222222 100%);
+            background: -webkit-linear-gradient(top, #3c3c3c 0%, #222222 100%);
+        }
+        td:hover{
+            background:grey;
+        }
+    </style>
+  </head>
+  <body>
+    <div class= "container">
+        <h1 class="page-header text-center">Student Schedule</h1>
+        <hr> 
+        <div class="wrapper">
+                <div style="overflow-x:auto;" class = "container"> <h1 class="text-center"><small>Week 1</small></h1>
+                    <table>
+                        <tr>
+                            <th>&nbsp;</th>
+                            <th> Sun</th>
+                            <th> Mon</th>
+                            <th> Tues</th>
+                            <th> Wed</th>
+                            <th> Thur</th>
+                            <th> Fri</th>
+                            <th> Sat</th>
+                        </tr>
+                        <tr>
+                            <td>Morning</td>
+                            <td id="cell1" onclick="cell1func(this)" th:text="${w1SunM}"></td>
+                            <td id="cell2" onclick="cell2func(this)" th:text="${w1MonM}"></td>
+                            <td id="cell3 " onclick="cell3func(this)" th:text="${w1TuesM}"></td>
+                            <td id="cell4" onclick="cell4func(this)" th:text="${w1WedsM}"></td>
+                            <td id="cell5" onclick="cell5func(this)" th:text="${w1ThurM}"></td>
+                            <td id="cell6" onclick="cell6func(this)" th:text="${w1FriM}"></td>
+                            <td id="cell7" onclick="cell7func(this)" th:text="${w1SatM}"></td>
+                        </tr>
+                        <tr>
+                            <td>Afternoon</td>
+                            <td onclick="function1(this)" th:text="${w1SunA}"></td>
+                            <td onclick="function1(this)" th:text="${w1MonA}"></td>
+                            <td onclick="function1(this)" th:text="${w1TuesA}"></td>
+                            <td onclick="function1(this)" th:text="${w1WedsA}"></td>
+                            <td onclick="function1(this)" th:text="${w1ThurA}"></td>
+                            <td onclick="function1(this)" th:text="${w1FriA}"></td>
+                            <td onclick="function1(this)" th:text="${w1SatA}"></td>
+                        </tr>
+                    </table>
+                </div>
+                    <div class = "container btn-group-vertical" role="group">
+                        <form action="/Neurology/1" >
+                            <input type="submit" value="Neurology" id="1" />
+                        </form>
+                        <form action="/Family Medicine/2">
+                            <input type="submit" value="Family Doc" id="2"/>
+                        </form>
+                        <form action="/Internal Medicine/3">
+                            <input type="submit" value="Internal Medicine" id="3" />
+                        </form>
+                        <form action="/Surgery/4">
+                            <input type="submit" value="Surgery" id="4" />
+                        </form>
+                        <form action="/ER/5">
+                            <input type="submit" value="ER" id="5"/>
+                        </form>
+                        <form action="/OBGYN/6">
+                            <input type="submit" value="OBGYN" id="6"/>
+                        </form>
+                        <form action="/Pediatrics/7">
+                            <input type="submit" value="Pediatrics" id="7"/>
+                        </form>
+                        <form action="/Phychiatry/8">
+                            <input type="submit" value="Phychiatry" id="8"/>
+                        </form>
+                        <form action="/IM Sub-Specialty/9">
+                            <input type="submit" value="IM Sub-Specialty" id="9"/>
+                        </form>
+                    </div>
+                <div class = "container"> <h1 class="text-center"><small>Week 2</small></h1>
+                    <table>
+                        <tr>
+                            <th>&nbsp;</th>
+                            <th> Sun</th>
+                            <th> Mon</th>
+                            <th> Tues</th>
+                            <th> Wed</th>
+                            <th> Thur</th>
+                            <th> Fri</th>
+                            <th> Sat</th>
+                        </tr>
+                        <tr >
+                            <td>Morning</td>
+                            <td th:text="${w2SunM}"></td>
+                            <td th:text="${w2MonM}"></td>
+                            <td th:text="${w2TuesM}"></td>
+                            <td th:text="${w2WedsM}"></td>
+                            <td th:text="${w2ThurM}"></td>
+                            <td th:text="${w2FriM}"></td>
+                            <td th:text="${w2SatM}"></td>
+                        </tr>
+                        <tr>
+                            <td>Afternoon</td>
+                            <td th:text="${w2SunA}"></td>
+                            <td th:text="${w2MonA}"></td>
+                            <td th:text="${w2TuesA}"></td>
+                            <td th:text="${w2WedsA}"></td>
+                            <td th:text="${w2ThurA}"></td>
+                            <td th:text="${w2FriA}"></td>
+                            <td th:text="${w2SatA}"></td>
+                        </tr>
+                    </table>
+                </div> 
+        </div>
+        <div class = "container" style="position:relative; left:835px;">
+                <button type ="button" class= "btn btn-default btn-lg" >Submit</button>
+        </div>
+    </div>
+    <script th:inline="javascript">
+
+        //sessionStorage.cell1Color = null;
+
+        window.onload = loadFunc;
+
+        function cell1func(x){
+
+           var id1 = /*[[${id}]]*/null;
+           var btn = document.getElementById(id1);
+           sessionStorage.cell1BtnDis = true;
+           btn.disabled = true;
+           x.style.background = "green";
+           var prof = /*[[${prof}]]*/ null;
+           sessionStorage.cell1Color = "green";
+           sessionStorage.cell1Clerk = prof;
+           x.innerHTML = sessionStorage.cell1Clerk;
+        }
+
+        function cell2func(x){
+
+            var id1 = /*[[${id}]]*/null;
+            var btn = document.getElementById(id1);
+            var prof = /*[[${prof}]]*/ null;
+
+            x.style.background = "green";
+
+            btn.disabled = true;
+
+            sessionStorage.cell2BtnDis = true;
+            sessionStorage.cell2Color = "green";
+            sessionStorage.cell2Clerk = prof;
+
+            x.innerHTML = sessionStorage.cell2Clerk;
+
+        }
+
+        function cell3func(x){
+
+            var id1 = /*[[${id}]]*/null;
+            var btn = document.getElementById(id1);
+            var prof = /*[[${prof}]]*/ null;
+
+            x.style.background = "green";
+
+            btn.disabled = true;
+
+            sessionStorage.cell3BtnDis = true;
+            sessionStorage.cell3Color = "green";
+            sessionStorage.cell3Clerk = prof;
+
+            x.innerHTML = sessionStorage.cell3Clerk;
+
+        }
+
+        function cell4func(x){
+
+            var id1 = /*[[${id}]]*/null;
+            var btn = document.getElementById(id1);
+            var prof = /*[[${prof}]]*/ null;
+
+            x.style.background = "green";
+
+            btn.disabled = true;
+
+            sessionStorage.cell4BtnDis = true;
+            sessionStorage.cell4Color = "green";
+            sessionStorage.cell4Clerk = prof;
+
+            x.innerHTML = sessionStorage.cell4Clerk;
+
+        }
+
+        function cell5func(x){
+
+            var id1 = /*[[${id}]]*/null;
+            var btn = document.getElementById(id1);
+            var prof = /*[[${prof}]]*/ null;
+
+            x.style.background = "green";
+
+            btn.disabled = true;
+
+            sessionStorage.cell5BtnDis = true;
+            sessionStorage.cell5Color = "green";
+            sessionStorage.cell5Clerk = prof;
+
+            x.innerHTML = sessionStorage.cell5Clerk;
+
+        }
+
+        function cell6func(x){
+
+            var id1 = /*[[${id}]]*/null;
+            var btn = document.getElementById(id1);
+            var prof = /*[[${prof}]]*/ null;
+
+            x.style.background = "green";
+
+            btn.disabled = true;
+
+            sessionStorage.cell6BtnDis = true;
+            sessionStorage.cell6Color = "green";
+            sessionStorage.cell6Clerk = prof;
+
+            x.innerHTML = sessionStorage.cell6Clerk;
+
+        }
+
+        function cell7func(x){
+
+            var id1 = /*[[${id}]]*/null;
+            var btn = document.getElementById(id1);
+            var prof = /*[[${prof}]]*/ null;
+
+            x.style.background = "green";
+
+            btn.disabled = true;
+
+            sessionStorage.cell7BtnDis = true;
+            sessionStorage.cell7Color = "green";
+            sessionStorage.cell7Clerk = prof;
+
+            x.innerHTML = sessionStorage.cell7Clerk;
+
+        }
+
+
+
+        function loadFunc(){
+            //if(sessionStorage.cell1Color) {
+                document.getElementById("cell1").style.background = sessionStorage.cell1Color;
+                document.getElementById("cell1").innerHTML = sessionStorage.cell1Clerk;
+                //document.getElementById("1").disabled = sessionStorage.cell1BtnDis;
+           // }
+            if(sessionStorage.cell2Color) {
+                document.getElementById("cell2").style.background = sessionStorage.cell2Color;
+                document.getElementById("cell2").innerHTML = sessionStorage.cell2Clerk;
+                //document.getElementById("2").disabled = sessionStorage.cell2BtnDis;
+            }
+            if(sessionStorage.cell3Color) {
+                var id1 = /*[[${id}]]*/null;
+                document.getElementById("cell3").style.background = sessionStorage.cell3Color;
+                document.getElementById("cell3").innerHTML = sessionStorage.cell3Clerk;
+                //document.getElementById(id1).disabled = sessionStorage.cell3BtnDis;
+            }
+            if(sessionStorage.cell4Color) {
+                document.getElementById("cell4").style.background = sessionStorage.cell4Color;
+                document.getElementById("cell4").innerHTML = sessionStorage.cell4Clerk;
+                //document.getElementById("4").disabled = sessionStorage.cell4BtnDis;
+            }
+            if(sessionStorage.cell5Color) {
+                document.getElementById("cell5").style.background = sessionStorage.cell5Color;
+                document.getElementById("cell5").innerHTML = sessionStorage.cell5Clerk;
+                //document.getElementById("5").disabled = sessionStorage.cell5BtnDis;
+            }
+            if(sessionStorage.cell6Color) {
+                document.getElementById("cell6").style.background = sessionStorage.cell6Color;
+                document.getElementById("cell6").innerHTML = sessionStorage.cell6Clerk;
+                //document.getElementById("6").disabled = sessionStorage.cell6BtnDis;
+            }
+            if(sessionStorage.cell7Color) {
+                document.getElementById("cell7").style.background = sessionStorage.cell7Color;
+                document.getElementById("cell7").innerHTML = sessionStorage.cell7Clerk;
+                //document.getElementById("7").disabled = sessionStorage.cell7BtnDis;
+            }
+        }
+
+    </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="../../Desktop/LIC/UC04v1/src/main/resources/templates/js/bootstrap.min.js"></script>
+  </body>
+<!-- <script th:inline="javascript">
+     $('button[name="nbtn"]').click(function(event){
+         event.preventDefault();
+         var data = $('form').seralize();
+         data += "carl" + "Neurology";
+         $.post('/index', data, 'html');
+     })
+ </script>-->
+</html>
+
