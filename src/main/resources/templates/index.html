@@ -66,7 +66,11 @@
   <body>
     <div class= "container">
         <h1 class="page-header text-center">Student Schedule</h1>
-        <hr> 
+        <hr>
+        <div>
+            <div th:text="${stu.getName()}"></div>
+            <div th:text="${stu.getEmail()}"></div>
+        </div>
         <div class="wrapper">
                 <div style="overflow-x:auto;" class = "container"> <h1 class="text-center"><small>Week 1</small></h1>
                     <table>
@@ -82,53 +86,53 @@
                         </tr>
                         <tr>
                             <td>Morning</td>
-                            <td id="cell1" onclick="cell1func(this)" th:text="${w1SunM}"></td>
-                            <td id="cell2" onclick="cell2func(this)" th:text="${w1MonM}"></td>
-                            <td id="cell3" onclick="cell3func(this)" th:text="${w1TuesM}"></td>
-                            <td id="cell4" onclick="cell4func(this)" th:text="${w1WedsM}"></td>
-                            <td id="cell5" onclick="cell5func(this)" th:text="${w1ThurM}"></td>
-                            <td id="cell6" onclick="cell6func(this)" th:text="${w1FriM}"></td>
-                            <td id="cell7" onclick="cell7func(this)" th:text="${w1SatM}"></td>
+                            <td id="cell1" onclick="cell1(this)" th:text="${count[0]}"></td>
+                            <td id="cell2" onclick="cell2(this)" th:text="${count[1]}"></td>
+                            <td id="cell3" onclick="cell3(this)" th:text="${count[2]}"></td>
+                            <td id="cell4" onclick="cell4(this)" th:text="${count[3]}"></td>
+                            <td id="cell5" onclick="cell5(this)" th:text="${count[4]}"></td>
+                            <td id="cell6" onclick="cell6(this)" th:text="${count[5]}"></td>
+                            <td id="cell7" onclick="cell7(this)" th:text="${count[6]}"></td>
                         </tr>
                         <tr>
                             <td>Afternoon</td>
-                            <td onclick="function1(this)" th:text="${w1SunA}"></td>
-                            <td onclick="function1(this)" th:text="${w1MonA}"></td>
-                            <td onclick="function1(this)" th:text="${w1TuesA}"></td>
-                            <td onclick="function1(this)" th:text="${w1WedsA}"></td>
-                            <td onclick="function1(this)" th:text="${w1ThurA}"></td>
-                            <td onclick="function1(this)" th:text="${w1FriA}"></td>
-                            <td onclick="function1(this)" th:text="${w1SatA}"></td>
+                            <td id="cell8" onclick="cell8(this)" th:text="${count[7]}"></td>
+                            <td id="cell9" onclick="cell9(this)" th:text="${count[8]}"></td>
+                            <td id="cell10" onclick="cell10(this)" th:text="${count[9]}"></td>
+                            <td id="cell11" onclick="cell11(this)" th:text="${count[10]}"></td>
+                            <td id="cell12" onclick="cell12(this)" th:text="${count[11]}"></td>
+                            <td id="cell13" onclick="cell13(this)" th:text="${count[12]}"></td>
+                            <td id="cell14" onclick="cell14(this)" th:text="${count[13]}"></td>
                         </tr>
                     </table>
                 </div>
                     <div class = "container btn-group-vertical" role="group">
-                        <form action="/Neurology/1" >
-                            <input type="submit" value="Neurology" id="1" />
+                        <form action = "#" th:action="@{/{path}/Neurology(path=${stu.getId()})}"  >
+                            <input type="submit" value="Neurology" id="Neurology"/>
                         </form>
-                        <form action="/Family Medicine/2">
-                            <input type="submit" value="Family Doc" id="2"/>
+                        <form action = "#" th:action="@{/{path}/Family Medicine(path=${stu.getId()})}" >
+                            <input type="submit" value="Family Medicine" id="Family Medicine"/>
                         </form>
-                        <form action="/Internal Medicine/3">
-                            <input type="submit" value="Internal Medicine" id="3" />
+                        <form action = "#" th:action="@{/{path}/Internal Medicine(path=${stu.getId()})}" >
+                            <input type="submit" value="Internal Medicine" id="Internal Medicine"/>
                         </form>
-                        <form action="/Surgery/4">
-                            <input type="submit" value="Surgery" id="4" />
+                        <form action = "#" th:action="@{/{path}/Surgery(path=${stu.getId()})}" >
+                            <input type="submit" value="Surgery" id="Surgery"/>
                         </form>
-                        <form action="/ER/5">
-                            <input type="submit" value="ER" id="5"/>
+                        <form action = "#" th:action="@{/{path}/ER(path=${stu.getId()})}" >
+                            <input type="submit" value="ER" id="ER"/>
                         </form>
-                        <form action="/OBGYN/6">
-                            <input type="submit" value="OBGYN" id="6"/>
+                        <form action = "#" th:action="@{/{path}/OBGYN(path=${stu.getId()})}" >
+                            <input type="submit" value="OBGYN" id="OBGYN"/>
                         </form>
-                        <form action="/Pediatrics/7">
-                            <input type="submit" value="Pediatrics" id="7"/>
+                        <form action = "#" th:action="@{/{path}/Pediatrics(path=${stu.getId()})}" >
+                            <input type="submit" value="Pediatrics" id="Pediatrics"/>
                         </form>
-                        <form action="/Phychiatry/8">
-                            <input type="submit" value="Phychiatry" id="8"/>
+                        <form action = "#" th:action="@{/{path}/Phychiatry(path=${stu.getId()})}" >
+                            <input type="submit" value="Phychiatry" id="Phychiatry"/>
                         </form>
-                        <form action="/IM Sub-Specialty/9">
-                            <input type="submit" value="IM Sub-Specialty" id="9"/>
+                        <form action = "#" th:action="@{/{path}/IM Sub-Specialty(path=${stu.getId()})}" >
+                            <input type="submit" value="IM Sub-Specialty" id="IM Sub-Specialty"/>
                         </form>
                     </div>
                 <div class = "container"> <h1 class="text-center"><small>Week 2</small></h1>
@@ -145,23 +149,23 @@
                         </tr>
                         <tr >
                             <td>Morning</td>
-                            <td th:text="${w2SunM}"></td>
-                            <td th:text="${w2MonM}"></td>
-                            <td th:text="${w2TuesM}"></td>
-                            <td th:text="${w2WedsM}"></td>
-                            <td th:text="${w2ThurM}"></td>
-                            <td th:text="${w2FriM}"></td>
-                            <td th:text="${w2SatM}"></td>
+                            <td id="cell15" onclick="cell15(this)" th:text="${count[14]}"></td>
+                            <td id="cell16" onclick="cell16(this)" th:text="${count[15]}"></td>
+                            <td id="cell17" onclick="cell17(this)" th:text="${count[16]}"></td>
+                            <td id="cell18" onclick="cell18(this)" th:text="${count[17]}"></td>
+                            <td id="cell19" onclick="cell19(this)" th:text="${count[18]}"></td>
+                            <td id="cell20" onclick="cell20(this)" th:text="${count[19]}"></td>
+                            <td id="cell21" onclick="cell21(this)" th:text="${count[20]}"></td>
                         </tr>
                         <tr>
                             <td>Afternoon</td>
-                            <td th:text="${w2SunA}"></td>
-                            <td th:text="${w2MonA}"></td>
-                            <td th:text="${w2TuesA}"></td>
-                            <td th:text="${w2WedsA}"></td>
-                            <td th:text="${w2ThurA}"></td>
-                            <td th:text="${w2FriA}"></td>
-                            <td th:text="${w2SatA}"></td>
+                            <td id="cell22" onclick="cell22(this)" th:text="${count[21]}"></td>
+                            <td id="cell23" onclick="cell23(this)" th:text="${count[22]}"></td>
+                            <td id="cell24" onclick="cell24(this)" th:text="${count[23]}"></td>
+                            <td id="cell25" onclick="cell25(this)" th:text="${count[24]}"></td>
+                            <td id="cell26" onclick="cell26(this)" th:text="${count[25]}"></td>
+                            <td id="cell27" onclick="cell27(this)" th:text="${count[26]}"></td>
+                            <td id="cell28" onclick="cell28(this)" th:text="${count[27]}"></td>
                         </tr>
                     </table>
                 </div> 
@@ -173,170 +177,321 @@
     <script th:inline="javascript">
 
         //sessionStorage.cell1Color = null;
-
         window.onload = loadFunc;
+        var cells = ["cell1", "cell2", "cell3", "cell4", "cell5", "cell6", "cell7",
+        "cell8", "cell9", "cell10", "cell11", "cell12", "cell13","cell14","cell15",
+        "cell16","cell17","cell18","cell19","cell20","cell21","cell22","cell23","cell24",
+        "cell25","cell26","cell27", "cell28"]
+        var specialty = ["Neurology","Family Medicine", "Internal Medicine", "Surgery", "ER","OBGYN", "Pediatrics","Phychiatry","IM Sub-Specialty"]
 
-        function cell1func(x){
+        function cell1(x) {
+            if (x.innerText!=0) {
 
-           var id1 = /*[[${id}]]*/null;
-           var btn = document.getElementById(id1);
-           sessionStorage.cell1BtnDis = true;
-           btn.disabled = true;
-           x.style.background = "green";
-           var prof = /*[[${prof}]]*/ null;
-           sessionStorage.cell1Color = "green";
-           sessionStorage.cell1Clerk = prof;
-           x.innerHTML = sessionStorage.cell1Clerk;
+
+                var prof = /*[[${prof}]]*/ null;
+                sessionStorage.setItem(prof, "0");
+                x.style.background = "green";
+                x.innerText = prof;
+                x.disabled = true;
+                clear(prof, x.id);
+            }
         }
-
-        function cell2func(x){
-
-            var id1 = /*[[${id}]]*/null;
-            var btn = document.getElementById(id1);
+        function cell2(x) {
+            if (x.innerText!=0) {
+                var prof = /*[[${prof}]]*/ null;
+                sessionStorage.setItem(prof, "1");
+                x.style.background = "green";
+                x.innerText = prof;
+                x.disabled = true;
+                clear(prof, x.id);
+            }
+        }
+        function cell3(x) {
+            if (x.innerText!=0) {
+                var prof = /*[[${prof}]]*/ null;
+                sessionStorage.setItem(prof, "2");
+                x.style.background = "green";
+                x.innerText = prof;
+                x.disabled = true;
+                clear(prof, x.id);
+            }
+        }
+        function cell4(x) {
+            if (x.innerText!=0) {
+                var prof = /*[[${prof}]]*/ null;
+                sessionStorage.setItem(prof, "3");
+                x.style.background = "green";
+                x.innerText = prof;
+                x.disabled = true;
+                clear(prof, x.id);
+            }
+        }
+        function cell5(x) {
+            if (x.innerText!=0) {
+                var prof = /*[[${prof}]]*/ null;
+                sessionStorage.setItem(prof, "4");
+                x.style.background = "green";
+                x.innerText = prof;
+                x.disabled = true;
+                clear(prof, x.id);
+            }
+        }
+        function cell6(x) {
+            if (x.innerText!=0) {
+                var prof = /*[[${prof}]]*/ null;
+                sessionStorage.setItem(prof, "5");
+                x.style.background = "green";
+                x.innerText = prof;
+                x.disabled = true;
+                clear(prof, x.id);
+            }
+        }
+        function cell7(x) {
+            if (x.innerText!=0) {
+                var prof = /*[[${prof}]]*/ null;
+                sessionStorage.setItem(prof, "6")
+                x.style.background = "green";
+                x.innerText = prof;
+                x.disabled = true;
+                clear(prof, x.id);
+            }
+        }
+        function cell8(x) {
+            if (x.innerText!=0) {
+                var prof = /*[[${prof}]]*/ null;
+                sessionStorage.setItem(prof, "7");
+                x.style.background = "green";
+                x.innerText = prof;
+                x.disabled = true;
+                clear(prof, x.id);
+            }
+        }
+        function cell9(x) {
+            if (x.innerText!=0) {
+                var prof = /*[[${prof}]]*/ null;
+                sessionStorage.setItem(prof, "8");
+                x.style.background = "green";
+                x.innerText = prof;
+                x.disabled = true;
+                clear(prof, x.id);
+            }
+        }
+        function cell10(x) {
+            if (x.innerText!=0) {
+                var prof = /*[[${prof}]]*/ null;
+                sessionStorage.setItem(prof, "9");
+                x.style.background = "green";
+                x.innerText = prof;
+                x.disabled = true;
+                clear(prof, x.id);
+            }
+        }
+        function cell11(x) {
+            if (x.innerText!=0) {
+                var prof = /*[[${prof}]]*/ null;
+                sessionStorage.setItem(prof, "10");
+                x.style.background = "green";
+                x.innerText = prof;
+                x.disabled = true;
+                clear(prof, x.id);
+            }
+        }
+        function cell12(x) {
+            if (x.innerText!=0) {
+                var prof = /*[[${prof}]]*/ null;
+                sessionStorage.setItem(prof, "11");
+                x.style.background = "green";
+                x.innerText = prof;
+                x.disabled = true;
+                clear(prof, x.id);
+            }
+        }
+        function cell13(x) {
+            if (x.innerText!=0) {
+                var prof = /*[[${prof}]]*/ null;
+                sessionStorage.setItem(prof, "12");
+                x.style.background = "green";
+                x.innerText = prof;
+                x.disabled = true;
+                clear(prof, x.id);
+            }
+        }
+        function cell14(x) {
+            if (x.innerText!=0) {
+                var prof = /*[[${prof}]]*/ null;
+                sessionStorage.setItem(prof, "13");
+                x.style.background = "green";
+                x.innerText = prof;
+                x.disabled = true;
+                clear(prof, x.id);
+            }
+        }
+        function cell15(x) {
+            if (x.innerText!=0) {
+                var prof = /*[[${prof}]]*/ null;
+                sessionStorage.setItem(prof, "14");
+                x.style.background = "green";
+                x.innerText = prof;
+                x.disabled = true;
+                clear(prof, x.id);
+            }
+        }
+        function cell16(x) {
             var prof = /*[[${prof}]]*/ null;
-
+            sessionStorage.setItem(prof, "15");
             x.style.background = "green";
-
-            btn.disabled = true;
-
-            sessionStorage.cell2BtnDis = true;
-            sessionStorage.cell2Color = "green";
-            sessionStorage.cell2Clerk = prof;
-
-            x.innerHTML = sessionStorage.cell2Clerk;
-
+            x.innerText = prof;
+            x.disabled = true;
+            clear(prof,x.id);
         }
-
-        function cell3func(x){
-
-            var id1 = /*[[${id}]]*/null;
-            var btn = document.getElementById(id1);
-            var prof = /*[[${prof}]]*/ null;
-
-            x.style.background = "green";
-
-            btn.disabled = true;
-
-            sessionStorage.cell3BtnDis = true;
-            sessionStorage.cell3Color = "green";
-            sessionStorage.cell3Clerk = prof;
-
-            x.innerHTML = sessionStorage.cell3Clerk;
-
+        function cell17(x) {
+            if (x.innerText!=0) {
+                var prof = /*[[${prof}]]*/ null;
+                sessionStorage.setItem(prof, "16");
+                x.style.background = "green";
+                x.innerText = prof;
+                x.disabled = true;
+                clear(prof, x.id);
+            }
         }
-
-        function cell4func(x){
-
-            var id1 = /*[[${id}]]*/null;
-            var btn = document.getElementById(id1);
-            var prof = /*[[${prof}]]*/ null;
-
-            x.style.background = "green";
-
-            btn.disabled = true;
-
-            sessionStorage.cell4BtnDis = true;
-            sessionStorage.cell4Color = "green";
-            sessionStorage.cell4Clerk = prof;
-
-            x.innerHTML = sessionStorage.cell4Clerk;
-
+        function cell18(x) {
+            if (x.innerText!=0) {
+                var prof = /*[[${prof}]]*/ null;
+                sessionStorage.setItem(prof, "17");
+                x.style.background = "green";
+                x.innerText = prof;
+                x.disabled = true;
+                clear(prof, x.id);
+            }
         }
-
-        function cell5func(x){
-
-            var id1 = /*[[${id}]]*/null;
-            var btn = document.getElementById(id1);
-            var prof = /*[[${prof}]]*/ null;
-
-            x.style.background = "green";
-
-            btn.disabled = true;
-
-            sessionStorage.cell5BtnDis = true;
-            sessionStorage.cell5Color = "green";
-            sessionStorage.cell5Clerk = prof;
-
-            x.innerHTML = sessionStorage.cell5Clerk;
-
+        function cell19(x) {
+            if (x.innerText!=0) {
+                var prof = /*[[${prof}]]*/ null;
+                sessionStorage.setItem(prof, "18");
+                x.style.background = "green";
+                x.innerText = prof;
+                x.disabled = true;
+                clear(prof, x.id);
+            }
         }
-
-        function cell6func(x){
-
-            var id1 = /*[[${id}]]*/null;
-            var btn = document.getElementById(id1);
-            var prof = /*[[${prof}]]*/ null;
-
-            x.style.background = "green";
-
-            btn.disabled = true;
-
-            sessionStorage.cell6BtnDis = true;
-            sessionStorage.cell6Color = "green";
-            sessionStorage.cell6Clerk = prof;
-
-            x.innerHTML = sessionStorage.cell6Clerk;
-
+        function cell20(x) {
+            if (x.innerText!=0) {
+                var prof = /*[[${prof}]]*/ null;
+                sessionStorage.setItem(prof, "19");
+                x.style.background = "green";
+                x.innerText = prof;
+                x.disabled = true;
+                clear(prof, x.id);
+            }
         }
-
-        function cell7func(x){
-
-            var id1 = /*[[${id}]]*/null;
-            var btn = document.getElementById(id1);
-            var prof = /*[[${prof}]]*/ null;
-
-            x.style.background = "green";
-
-            btn.disabled = true;
-
-            sessionStorage.cell7BtnDis = true;
-            sessionStorage.cell7Color = "green";
-            sessionStorage.cell7Clerk = prof;
-
-            x.innerHTML = sessionStorage.cell7Clerk;
-
+        function cell21(x) {
+            if (x.innerText!=0) {
+                var prof = /*[[${prof}]]*/ null;
+                sessionStorage.setItem(prof, "20");
+                x.style.background = "green";
+                x.innerText = prof;
+                x.disabled = true;
+                clear(prof, x.id);
+            }
         }
-
+        function cell22(x) {
+            if (x.innerText!=0) {
+                var prof = /*[[${prof}]]*/ null;
+                sessionStorage.setItem(prof, "21");
+                x.style.background = "green";
+                x.innerText = prof;
+                x.disabled = true;
+                clear(prof, x.id);
+            }
+        }
+        function cell23(x) {
+            if (x.innerText!=0) {
+                var prof = /*[[${prof}]]*/ null;
+                sessionStorage.setItem(prof, "22");
+                x.style.background = "green";
+                x.innerText = prof;
+                x.disabled = true;
+                clear(prof, x.id);
+            }
+        }
+        function cell24(x) {
+            if (x.innerText!=0) {
+                var prof = /*[[${prof}]]*/ null;
+                sessionStorage.setItem(prof, "23");
+                x.style.background = "green";
+                x.innerText = prof;
+                x.disabled = true;
+                clear(prof, x.id);
+            }
+        }
+        function cell25(x) {
+            if (x.innerText!=0) {
+                var prof = /*[[${prof}]]*/ null;
+                sessionStorage.setItem(prof, "24");
+                x.style.background = "green";
+                x.innerText = prof;
+                x.disabled = true;
+                clear(prof, x.id);
+            }
+        }
+        function cell26(x) {
+            if (x.innerText!=0) {
+                var prof = /*[[${prof}]]*/ null;
+                sessionStorage.setItem(prof, "25");
+                x.style.background = "green";
+                x.innerText = prof;
+                x.disabled = true;
+                clear(prof, x.id);
+            }
+        }
+        function cell27(x) {
+            if (x.innerText!=0) {
+                var prof = /*[[${prof}]]*/ null;
+                sessionStorage.setItem(prof, "26");
+                x.style.background = "green";
+                x.innerText = prof;
+                x.disabled = true;
+                clear(prof, x.id);
+            }
+        }
+        function cell28(x) {
+            if (x.innerText!=0) {
+                var prof = /*[[${prof}]]*/ null;
+                sessionStorage.setItem(prof, "27");
+                x.style.background = "green";
+                x.innerText = prof;
+                x.disabled = true;
+                clear(prof, x.id);
+            }
+        }
+        function clear(prof,x) {
+            var count = /*[[${count}]]*/ null;
+            for (var i = 0; i<cells.length;i++){
+                if (cells[i]!=x && document.getElementById(cells[i]).innerText===prof) {
+                    document.getElementById(cells[i]).innerText = count[i];
+                    document.getElementById(cells[i]).style.background = "#3C3C3C";
+                    document.getElementById(cells[i]).disabled = false
+                }
+            }
+        }
 
 
         function loadFunc(){
-            if(sessionStorage.cell1Clerk) {
-                document.getElementById("cell1").style.background = sessionStorage.cell1Color;
-                document.getElementById("cell1").innerHTML = sessionStorage.cell1Clerk;
-                //document.getElementById("1").disabled = sessionStorage.cell1BtnDis;
-            }
-            if(sessionStorage.cell2Clerk) {
-                document.getElementById("cell2").style.background = sessionStorage.cell2Color;
-                document.getElementById("cell2").innerHTML = sessionStorage.cell2Clerk;
-                //document.getElementById("2").disabled = sessionStorage.cell2BtnDis;
-            }
-           if(sessionStorage.cell3Clerk) {
-                var id1 = /*[[${id}]]*/null;
+            var prof = /*[[${prof}]]*/ null;
+            document.getElementById(prof).style.background="#29b471"
+            for (var key in specialty) {
+                var schedule = sessionStorage.getItem(specialty[key]);
+                //console.log(schedule);
+                if (schedule!==null){
+                    if (parseInt(schedule)>-1) {
+                        document.getElementById(cells[parseInt(schedule)]).style.background = "green";
+                        document.getElementById(cells[parseInt(schedule)]).innerText= specialty[key];
+                        document.getElementById(cells[parseInt(schedule)]).disabled = true;
+                    }
+                }
 
-                document.getElementById("cell3").style.background = sessionStorage.cell3Color;
-                document.getElementById("cell3").innerHTML = sessionStorage.cell3Clerk;
-                //document.getElementById(id1).disabled = sessionStorage.cell3BtnDis;
             }
-            if(sessionStorage.cell4Clerk) {
-                document.getElementById("cell4").style.background = sessionStorage.cell4Color;
-                document.getElementById("cell4").innerHTML = sessionStorage.cell4Clerk;
-                //document.getElementById("4").disabled = sessionStorage.cell4BtnDis;
-            }
-           if(sessionStorage.cell5Clerk) {
-                document.getElementById("cell5").style.background = sessionStorage.cell5Color;
-                document.getElementById("cell5").innerHTML = sessionStorage.cell5Clerk;
-                //document.getElementById("5").disabled = sessionStorage.cell5BtnDis;
-            }
-            if(sessionStorage.cell6Clerk) {
-                document.getElementById("cell6").style.background = sessionStorage.cell6Color;
-                document.getElementById("cell6").innerHTML = sessionStorage.cell6Clerk;
-                //document.getElementById("6").disabled = sessionStorage.cell6BtnDis;
-            }
-            if(sessionStorage.cell7Clerk) {
-                document.getElementById("cell7").style.background = sessionStorage.cell7Color;
-                document.getElementById("cell7").innerHTML = sessionStorage.cell7Clerk;
-                //document.getElementById("7").disabled = sessionStorage.cell7BtnDis;
-            }
+
         }
 
     </script>

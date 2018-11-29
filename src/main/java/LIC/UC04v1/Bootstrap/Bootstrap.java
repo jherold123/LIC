@@ -1,6 +1,7 @@
 package LIC.UC04v1.Bootstrap;
 
 import LIC.UC04v1.model.Doctor;
+import LIC.UC04v1.model.Student;
 import LIC.UC04v1.repositories.ClerkshipRepository;
 import LIC.UC04v1.repositories.DoctorRepository;
 import LIC.UC04v1.repositories.StudentRepository;
@@ -52,10 +53,29 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
             doc.setName(values[0]+" "+values[1]);
             doc.setEmail(values[2]);
             doc.setProfession(values[3]);
-            System.out.println(values[4]);
             doc.setAvailable(values[4]);
             doctorRepository.save(doc);
         }
+        fileName = "student.csv";
 
+        classLoader = super.getClass().getClassLoader();
+
+        file = new File(classLoader.getResource(fileName).getFile());
+
+        br = null;
+        try {
+            br = new BufferedReader(new FileReader(file));
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        br.readLine();
+        while ((st = br.readLine()) != null){
+            values = st.split(",");
+            Student stu = new Student();
+            stu.setName(values[0]+" "+values[1]);
+            stu.setEmail(values[2]);
+            studentRepository.save(stu);
+        }
     }
 }
