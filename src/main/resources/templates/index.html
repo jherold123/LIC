@@ -292,18 +292,21 @@
             </div>
         </div>
     </div>
+
     <script th:inline="javascript">
 
 
         window.onload = checkAvail;
+
         var cellColors = ['c1c','c2c','c3c','c4c','c5c','c6c','c7c','c11c','c22c','c33c','c44c','c55c','c66c','c77c'];
         var cellLabels = ['c1l','c2l','c3l','c4l','c5l','c6l','c7l','c11l','c22l','c33l','c44l','c55l','c66l','c77l'];
         var cellButtons = ['c1b','c2b','c3b','c4b','c5b','c6b','c7b','c11b','c22b','c33b','c44b','c55b','c66b','c77b'];
         var cellIDs = ["cell1","cell2","cell3","cell4","cell5","cell6","cell7","cell11","cell22","cell33","cell44","cell55","cell66","cell77"];
         var clerkBtns = ["1","2","3","4","5","6","7","8","9"];
 
-        function checkAvail(){
 
+        function checkAvail(){
+            //event.preventDefault();
             for(i = 0; i<=14; i++){
                 if(sessionStorage.getItem(cellColors[i])) {
                     document.getElementById(cellIDs[i]).style.background = sessionStorage.getItem(cellColors[i]);
@@ -329,15 +332,11 @@
                 window.alert("Press 'Schedule' to submit schedule!")
             }
 
-            var bool = /*[[${w1MonM}]]*/null;
-            if(bool == 0){
-                var cell = document.getElementById("cell2");
-                cell.style.background = "red";
-            }
         }
 
-        function test(x,cellColor,cellLabel,cellBtn,cellBool,y,row,col){
 
+        function test(x,cellColor,cellLabel,cellBtn,cellBool,y,row,col){
+            //event.preventDefault();
             var table = document.getElementById("table1");
             var count = y;
             var id1 = /*[[${id}]]*/null;
@@ -411,185 +410,7 @@
             }
         }
 
-        function cell2func(x){
 
-            var bool = /*[[${w1MonM}]]*/null;
-            if(!bool){
-                window.alert("No Doctors Available at this time!");
-            }else {
-                var id1 = /*[[${id}]]*/null;
-                var btn = document.getElementById(id1);
-                var prof = /*[[${prof}]]*/ null;
-
-                x.style.background = "green";
-
-                btn.disabled = true;
-
-                sessionStorage.cell2BtnDis = true;
-                sessionStorage.cell2Color = "green";
-                sessionStorage.cell2Clerk = prof;
-
-                x.innerHTML = sessionStorage.cell2Clerk;
-            }
-
-        }
-
-        function cell3func(x){
-
-            var bool = /*[[${w1TuesM}]]*/null;
-            if(!bool){
-                window.alert("No Doctors Available at this time!");
-            }else {
-                var id1 = /*[[${id}]]*/null;
-                var btn = document.getElementById(id1);
-                var prof = /*[[${prof}]]*/ null;
-
-                x.style.background = "green";
-
-                btn.disabled = true;
-
-                sessionStorage.cell3BtnDis = true;
-                sessionStorage.cell3Color = "green";
-                sessionStorage.cell3Clerk = prof;
-
-                x.innerHTML = sessionStorage.cell3Clerk;
-            }
-
-        }
-
-        function cell4func(x){
-
-            var bool = /*[[${w1WedsM}]]*/null;
-            if(!bool){
-                window.alert("No Doctors Available at this time!");
-            }else {
-                var id1 = /*[[${id}]]*/null;
-                var btn = document.getElementById(id1);
-                var prof = /*[[${prof}]]*/ null;
-
-                x.style.background = "green";
-
-                btn.disabled = true;
-
-                sessionStorage.cell4BtnDis = true;
-                sessionStorage.cell4Color = "green";
-                sessionStorage.cell4Clerk = prof;
-
-                x.innerHTML = sessionStorage.cell4Clerk;
-            }
-
-        }
-
-        function cell5func(x){
-
-            var bool = /*[[${w1ThurM}]]*/null;
-            if(!bool){
-                window.alert("No Doctors Available at this time!");
-            }else {
-                var id1 = /*[[${id}]]*/null;
-                var btn = document.getElementById(id1);
-                var prof = /*[[${prof}]]*/ null;
-
-                x.style.background = "green";
-
-                btn.disabled = true;
-
-                sessionStorage.cell5BtnDis = true;
-                sessionStorage.cell5Color = "green";
-                sessionStorage.cell5Clerk = prof;
-
-                x.innerHTML = sessionStorage.cell5Clerk;
-            }
-
-        }
-
-        function cell6func(x){
-
-            var bool = /*[[${w1FriM}]]*/null;
-            if(!bool){
-                window.alert("No Doctors Available at this time!");
-            }else {
-                var id1 = /*[[${id}]]*/null;
-                var btn = document.getElementById(id1);
-                var prof = /*[[${prof}]]*/ null;
-
-                x.style.background = "green";
-
-                btn.disabled = true;
-
-                sessionStorage.cell6BtnDis = true;
-                sessionStorage.cell6Color = "green";
-                sessionStorage.cell6Clerk = prof;
-
-                x.innerHTML = sessionStorage.cell6Clerk;
-            }
-
-        }
-
-        function cell7func(x){
-
-            var bool = /*[[${w1SatM}]]*/null;
-            if(!bool){
-                window.alert("No Doctors Available at this time!");
-            }else {
-                var id1 = /*[[${id}]]*/null;
-                var btn = document.getElementById(id1);
-                var prof = /*[[${prof}]]*/ null;
-
-                x.style.background = "green";
-
-                btn.disabled = true;
-
-                sessionStorage.cell7BtnDis = true;
-                sessionStorage.cell7Color = "green";
-                sessionStorage.cell7Clerk = prof;
-
-                x.innerHTML = sessionStorage.cell7Clerk;
-            }
-
-        }
-
-
-
-        /*function loadFunc(){
-            window.alert("HERE");
-            if(sessionStorage.cell1Clerk) {
-               // document.getElementById("cell1").style.background = sessionStorage.cell1Color;
-                document.getElementById("cell1").innerHTML = sessionStorage.cell1Clerk;
-                //document.getElementById("1").disabled = sessionStorage.cell1BtnDis;
-            }
-            if(sessionStorage.cell2Clerk) {
-                document.getElementById("cell2").style.background = sessionStorage.cell2Color;
-                document.getElementById("cell2").innerHTML = sessionStorage.cell2Clerk;
-                //document.getElementById("2").disabled = sessionStorage.cell2BtnDis;
-            }
-           if(sessionStorage.cell3Clerk) {
-
-                document.getElementById("cell3").style.background = sessionStorage.cell3Color;
-                document.getElementById("cell3").innerHTML = sessionStorage.cell3Clerk;
-                //document.getElementById(id1).disabled = sessionStorage.cell3BtnDis;
-            }
-            if(sessionStorage.cell4Clerk) {
-                document.getElementById("cell4").style.background = sessionStorage.cell4Color;
-                document.getElementById("cell4").innerHTML = sessionStorage.cell4Clerk;
-                //document.getElementById("4").disabled = sessionStorage.cell4BtnDis;
-            }
-           if(sessionStorage.cell5Clerk) {
-                document.getElementById("cell5").style.background = sessionStorage.cell5Color;
-                document.getElementById("cell5").innerHTML = sessionStorage.cell5Clerk;
-                //document.getElementById("5").disabled = sessionStorage.cell5BtnDis;
-            }
-            if(sessionStorage.cell6Clerk) {
-                document.getElementById("cell6").style.background = sessionStorage.cell6Color;
-                document.getElementById("cell6").innerHTML = sessionStorage.cell6Clerk;
-                //document.getElementById("6").disabled = sessionStorage.cell6BtnDis;
-            }
-            if(sessionStorage.cell7Clerk) {
-                document.getElementById("cell7").style.background = sessionStorage.cell7Color;
-                document.getElementById("cell7").innerHTML = sessionStorage.cell7Clerk;
-                //document.getElementById("7").disabled = sessionStorage.cell7BtnDis;
-            }
-        }*/
 
     </script>
     <!-- Optional JavaScript -->
