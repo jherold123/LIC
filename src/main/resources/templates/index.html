@@ -82,13 +82,13 @@
                         </tr>
                         <tr>
                             <td>Morning</td>
-                            <td id="cell1" onclick="cell1func(this)" th:text="${w1SunM}"></td>
-                            <td id="cell2" onclick="cell2func(this)" th:text="${w1MonM}"></td>
-                            <td id="cell3" onclick="cell3func(this)" th:text="${w1TuesM}"></td>
-                            <td id="cell4" onclick="cell4func(this)" th:text="${w1WedsM}"></td>
-                            <td id="cell5" onclick="cell5func(this)" th:text="${w1ThurM}"></td>
-                            <td id="cell6" onclick="cell6func(this)" th:text="${w1FriM}"></td>
-                            <td id="cell7" onclick="cell7func(this)" th:text="${w1SatM}"></td>
+                            <td id="cell1" th:onclick="|test(this, 'c1c', 'c1l', 'c1b', 'c1Bl', '${w1SunM}')|" th:text="${w1SunM}"></td>
+                            <td id="cell2" th:onclick="|test(this, 'c2c', 'c2l', 'c2b', 'c2Bl', '${w1MonM}')|" th:text="${w1MonM}"></td>
+                            <td id="cell3" th:onclick="|test(this, 'c3c', 'c3l', 'c3b', 'c3Bl', '${w1TuesM}')|" th:text="${w1TuesM}"></td>
+                            <td id="cell4" th:onclick="|test(this, 'c4c', 'c4l', 'c4b', 'c4Bl', '${w1WedsM}')|" th:text="${w1WedsM}"></td>
+                            <td id="cell5" th:onclick="|test(this, 'c5c', 'c5l', 'c5b', 'c5Bl', '${w1ThurM}')|" th:text="${w1ThurM}"></td>
+                            <td id="cell6" th:onclick="|test(this, 'c6c', 'c6l', 'c6b', 'c6Bl', '${w1FriM}')|" th:text="${w1FriM}"></td>
+                            <td id="cell7" th:onclick="|test(this, 'c7c', 'c7l', 'c7b', 'c7Bl', '${w1SatM}')|" th:text="${w1SatM}"></td>
                         </tr>
                         <tr>
                             <td>Afternoon</td>
@@ -174,134 +174,259 @@
 
         //sessionStorage.cell1Color = null;
 
-        window.onload = loadFunc;
+       // window.onload = loadFunc;
+        window.onload = checkAvail;
+        var cellColors = ['c1c','c2c','c3c','c4c','c5c','c6c','c7c'];
+        var cellLabels = ['c1l','c2l','c3l','c4l','c5l','c6l','c7l'];
+        var cellIDs = ["cell1","cell2","cell3","cell4","cell5","cell6","cell7"];
+
+        function checkAvail(){
+            for(i = 0; i<=7; i++){
+                if(sessionStorage.getItem(cellColors[i])) {
+                    document.getElementById(cellIDs[i]).style.background = sessionStorage.getItem(cellColors[i]);
+                    document.getElementById(cellIDs[i]).innerHTML = sessionStorage.getItem(cellLabels[i]);
+                    //document.getElementById("1").disabled = sessionStorage.cell1BtnDis;
+                }
+
+            }
+
+
+            var bool = /*[[${w1MonM}]]*/null;
+            if(bool == 0){
+                var cell = document.getElementById("cell2");
+                cell.style.background = "red";
+            }
+        }
+
+
 
         function cell1func(x){
 
-           var id1 = /*[[${id}]]*/null;
-           var btn = document.getElementById(id1);
-           sessionStorage.cell1BtnDis = true;
-           btn.disabled = true;
-           x.style.background = "green";
-           var prof = /*[[${prof}]]*/ null;
-           sessionStorage.cell1Color = "green";
-           sessionStorage.cell1Clerk = prof;
-           x.innerHTML = sessionStorage.cell1Clerk;
-        }
-
-        function cell2func(x){
-
+            var count = /*[[${w1SunM}]]*/null;
             var id1 = /*[[${id}]]*/null;
             var btn = document.getElementById(id1);
             var prof = /*[[${prof}]]*/ null;
 
-            x.style.background = "green";
+            if(sessionStorage.bool == 1) {
 
-            btn.disabled = true;
+                if (!count) {
+                    window.alert("No Doctors Available at this time!");
+                } else {
+                    window.alert("should change back")
+                    sessionStorage.cell1BtnDis = false;
+                    sessionStorage.setItem()
+                    btn.disabled = false;
+                    x.style.background = "initial";
+                    sessionStorage.cell1Color = "initial";
+                    sessionStorage.cell1Clerk = count;
+                    x.innerHTML = sessionStorage.cell1Clerk;
+                    sessionStorage.bool = 0;
+                }
+            }else{
 
-            sessionStorage.cell2BtnDis = true;
-            sessionStorage.cell2Color = "green";
-            sessionStorage.cell2Clerk = prof;
+                if (!count) {
+                    window.alert("No Doctors Available at this time!");
+                } else {
 
-            x.innerHTML = sessionStorage.cell2Clerk;
+                    sessionStorage.cell1BtnDis = true;
+                    btn.disabled = true;
+                    x.style.background = "green";
+                    sessionStorage.cell1Color = "green";
+                    sessionStorage.cell1Clerk = prof;
+                    x.innerHTML = sessionStorage.cell1Clerk;
+                    sessionStorage.bool = 1;
+
+
+                }
+            }
+        }
+
+
+
+        function test(x,cellColor,cellLabel,cellBtn,cellBool,y){
+
+            var count = y;
+            var id1 = /*[[${id}]]*/null;
+            var btn = document.getElementById(id1);
+            var prof = /*[[${prof}]]*/ null;
+            window.alert(count);
+            if(sessionStorage.getItem(cellBool) == '1') {
+
+                if (!count) {
+                    window.alert("No Doctors Available at this time!");
+                } else {
+                    window.alert("should change back")
+                    //sessionStorage.setItem(cellBtn, false);
+                    btn.disabled = false;
+                    x.style.background = "initial";
+                    sessionStorage.setItem(cellColor,"initial");
+                    sessionStorage.setItem(cellLabel, count);
+                    x.innerHTML = sessionStorage.getItem(cellLabel);
+                    sessionStorage.setItem(cellBool, '0');
+                }
+            }else{
+
+                if (!count) {
+                    window.alert("No Doctors Available at this time!");
+                } else {
+
+                    //sessionStorage.cell1BtnDis = true;
+                    btn.disabled = true;
+                    x.style.background = "green";
+                    sessionStorage.setItem(cellColor,"green");
+                    sessionStorage.setItem(cellLabel, prof);
+                    x.innerHTML = sessionStorage.getItem(cellLabel);
+                    sessionStorage.setItem(cellBool, '1');
+
+
+                }
+            }
+        }
+
+        function cell2func(x){
+
+            var bool = /*[[${w1MonM}]]*/null;
+            if(!bool){
+                window.alert("No Doctors Available at this time!");
+            }else {
+                var id1 = /*[[${id}]]*/null;
+                var btn = document.getElementById(id1);
+                var prof = /*[[${prof}]]*/ null;
+
+                x.style.background = "green";
+
+                btn.disabled = true;
+
+                sessionStorage.cell2BtnDis = true;
+                sessionStorage.cell2Color = "green";
+                sessionStorage.cell2Clerk = prof;
+
+                x.innerHTML = sessionStorage.cell2Clerk;
+            }
 
         }
 
         function cell3func(x){
 
-            var id1 = /*[[${id}]]*/null;
-            var btn = document.getElementById(id1);
-            var prof = /*[[${prof}]]*/ null;
+            var bool = /*[[${w1TuesM}]]*/null;
+            if(!bool){
+                window.alert("No Doctors Available at this time!");
+            }else {
+                var id1 = /*[[${id}]]*/null;
+                var btn = document.getElementById(id1);
+                var prof = /*[[${prof}]]*/ null;
 
-            x.style.background = "green";
+                x.style.background = "green";
 
-            btn.disabled = true;
+                btn.disabled = true;
 
-            sessionStorage.cell3BtnDis = true;
-            sessionStorage.cell3Color = "green";
-            sessionStorage.cell3Clerk = prof;
+                sessionStorage.cell3BtnDis = true;
+                sessionStorage.cell3Color = "green";
+                sessionStorage.cell3Clerk = prof;
 
-            x.innerHTML = sessionStorage.cell3Clerk;
+                x.innerHTML = sessionStorage.cell3Clerk;
+            }
 
         }
 
         function cell4func(x){
 
-            var id1 = /*[[${id}]]*/null;
-            var btn = document.getElementById(id1);
-            var prof = /*[[${prof}]]*/ null;
+            var bool = /*[[${w1WedsM}]]*/null;
+            if(!bool){
+                window.alert("No Doctors Available at this time!");
+            }else {
+                var id1 = /*[[${id}]]*/null;
+                var btn = document.getElementById(id1);
+                var prof = /*[[${prof}]]*/ null;
 
-            x.style.background = "green";
+                x.style.background = "green";
 
-            btn.disabled = true;
+                btn.disabled = true;
 
-            sessionStorage.cell4BtnDis = true;
-            sessionStorage.cell4Color = "green";
-            sessionStorage.cell4Clerk = prof;
+                sessionStorage.cell4BtnDis = true;
+                sessionStorage.cell4Color = "green";
+                sessionStorage.cell4Clerk = prof;
 
-            x.innerHTML = sessionStorage.cell4Clerk;
+                x.innerHTML = sessionStorage.cell4Clerk;
+            }
 
         }
 
         function cell5func(x){
 
-            var id1 = /*[[${id}]]*/null;
-            var btn = document.getElementById(id1);
-            var prof = /*[[${prof}]]*/ null;
+            var bool = /*[[${w1ThurM}]]*/null;
+            if(!bool){
+                window.alert("No Doctors Available at this time!");
+            }else {
+                var id1 = /*[[${id}]]*/null;
+                var btn = document.getElementById(id1);
+                var prof = /*[[${prof}]]*/ null;
 
-            x.style.background = "green";
+                x.style.background = "green";
 
-            btn.disabled = true;
+                btn.disabled = true;
 
-            sessionStorage.cell5BtnDis = true;
-            sessionStorage.cell5Color = "green";
-            sessionStorage.cell5Clerk = prof;
+                sessionStorage.cell5BtnDis = true;
+                sessionStorage.cell5Color = "green";
+                sessionStorage.cell5Clerk = prof;
 
-            x.innerHTML = sessionStorage.cell5Clerk;
+                x.innerHTML = sessionStorage.cell5Clerk;
+            }
 
         }
 
         function cell6func(x){
 
-            var id1 = /*[[${id}]]*/null;
-            var btn = document.getElementById(id1);
-            var prof = /*[[${prof}]]*/ null;
+            var bool = /*[[${w1FriM}]]*/null;
+            if(!bool){
+                window.alert("No Doctors Available at this time!");
+            }else {
+                var id1 = /*[[${id}]]*/null;
+                var btn = document.getElementById(id1);
+                var prof = /*[[${prof}]]*/ null;
 
-            x.style.background = "green";
+                x.style.background = "green";
 
-            btn.disabled = true;
+                btn.disabled = true;
 
-            sessionStorage.cell6BtnDis = true;
-            sessionStorage.cell6Color = "green";
-            sessionStorage.cell6Clerk = prof;
+                sessionStorage.cell6BtnDis = true;
+                sessionStorage.cell6Color = "green";
+                sessionStorage.cell6Clerk = prof;
 
-            x.innerHTML = sessionStorage.cell6Clerk;
+                x.innerHTML = sessionStorage.cell6Clerk;
+            }
 
         }
 
         function cell7func(x){
 
-            var id1 = /*[[${id}]]*/null;
-            var btn = document.getElementById(id1);
-            var prof = /*[[${prof}]]*/ null;
+            var bool = /*[[${w1SatM}]]*/null;
+            if(!bool){
+                window.alert("No Doctors Available at this time!");
+            }else {
+                var id1 = /*[[${id}]]*/null;
+                var btn = document.getElementById(id1);
+                var prof = /*[[${prof}]]*/ null;
 
-            x.style.background = "green";
+                x.style.background = "green";
 
-            btn.disabled = true;
+                btn.disabled = true;
 
-            sessionStorage.cell7BtnDis = true;
-            sessionStorage.cell7Color = "green";
-            sessionStorage.cell7Clerk = prof;
+                sessionStorage.cell7BtnDis = true;
+                sessionStorage.cell7Color = "green";
+                sessionStorage.cell7Clerk = prof;
 
-            x.innerHTML = sessionStorage.cell7Clerk;
+                x.innerHTML = sessionStorage.cell7Clerk;
+            }
 
         }
 
 
 
-        function loadFunc(){
+        /*function loadFunc(){
+            window.alert("HERE");
             if(sessionStorage.cell1Clerk) {
-                document.getElementById("cell1").style.background = sessionStorage.cell1Color;
+               // document.getElementById("cell1").style.background = sessionStorage.cell1Color;
                 document.getElementById("cell1").innerHTML = sessionStorage.cell1Clerk;
                 //document.getElementById("1").disabled = sessionStorage.cell1BtnDis;
             }
@@ -311,7 +436,6 @@
                 //document.getElementById("2").disabled = sessionStorage.cell2BtnDis;
             }
            if(sessionStorage.cell3Clerk) {
-                var id1 = /*[[${id}]]*/null;
 
                 document.getElementById("cell3").style.background = sessionStorage.cell3Color;
                 document.getElementById("cell3").innerHTML = sessionStorage.cell3Clerk;
@@ -337,7 +461,7 @@
                 document.getElementById("cell7").innerHTML = sessionStorage.cell7Clerk;
                 //document.getElementById("7").disabled = sessionStorage.cell7BtnDis;
             }
-        }
+        }*/
 
     </script>
     <!-- Optional JavaScript -->
