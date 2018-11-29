@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <!-- Required meta tags -->
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -12,33 +13,28 @@
 
       <title>Student Menu</title>
     <style>
-        a.button {
+       /* a.button {
             -webkit-appearance: button;
             -moz-appearance: button;
             appearance: button;
 
             text-decoration: none;
             color: initial;
-        }
-        .btn-default{
-            width:180px;
-            height:60px;
-        }
+        }*/
+        /*.btn-dark{
+            width: 250px;
+            height: 60px;
+        }*/
         .container{
             padding: 20px;
         }
-        .wrapper{
-            display:grid;
 
-            grid-template-columns: 85% 15%;
-            grid-column-gap: 1 em;
-        }
-        input{
+        /*input{
             width: 200px;
             height: 50px;
             border-radius: 5px;
             margin: 0 auto;
-        }
+        }*/
         table{
             height: 100px;
             width: 100%;
@@ -53,10 +49,10 @@
             color:white;
             border:1px solid #080808;
             border-collapse: collapse;
-            font-size: 18px;
+            font-size: 15px;
             font-family: Arial;
-            background: linear-gradient(top, #3c3c3c 0%, #222222 100%);
-            background: -webkit-linear-gradient(top, #3c3c3c 0%, #222222 100%);
+            /*background: linear-gradient(top, #3c3c3c 0%, #222222 100%);
+            background: -webkit-linear-gradient(top, #3c3c3c 0%, #222222 100%); */
         }
         td:hover{
             background:grey;
@@ -64,12 +60,50 @@
     </style>
   </head>
   <body>
-    <div class= "container">
-        <h1 class="page-header text-center">Student Schedule</h1>
-        <hr> 
-        <div class="wrapper">
-                <div style="overflow-x:auto;" class = "container"> <h1 class="text-center"><small>Week 1</small></h1>
-                    <table>
+  <!-- <div class= "container" id="main-container"> -->
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                  <a class="nav-link" href="#">TCU Medical School Schedule Builder <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="#">Link</a>
+              </li>
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Dropdown
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="#">Action</a>
+                      <a class="dropdown-item" href="#">Another action</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="#">Something else here</a>
+                  </div>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link disabled" href="#">Disabled</a>
+              </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+      </div>
+  </nav>
+
+        <div class="wrapper" id="body-wrapper">
+            <div class="row">
+                <div class="col-9" id="weekly-calendar">
+                    <h5>Week 1</h5>
+                    <table id="table1" class="table table-dark table-striped">
                         <tr>
                             <th>&nbsp;</th>
                             <th> Sun</th>
@@ -82,7 +116,7 @@
                         </tr>
                         <tr>
                             <td>Morning</td>
-                            <td id="cell1" th:onclick="|test(this, 'c1c', 'c1l', 'c1b', 'c1Bl', '${w1SunM}')|" th:text="${w1SunM}"></td>
+                            <td id="cell1" th:onclick="|test(this, 'c1c', 'c1l', 'c1b', 'c1Bl', '${w1SunM}',1,2)|" th:text="${w1SunM}"></td>
                             <td id="cell2" th:onclick="|test(this, 'c2c', 'c2l', 'c2b', 'c2Bl', '${w1MonM}')|" th:text="${w1MonM}"></td>
                             <td id="cell3" th:onclick="|test(this, 'c3c', 'c3l', 'c3b', 'c3Bl', '${w1TuesM}')|" th:text="${w1TuesM}"></td>
                             <td id="cell4" th:onclick="|test(this, 'c4c', 'c4l', 'c4b', 'c4Bl', '${w1WedsM}')|" th:text="${w1WedsM}"></td>
@@ -92,47 +126,17 @@
                         </tr>
                         <tr>
                             <td>Afternoon</td>
-                            <td onclick="function1(this)" th:text="${w1SunA}"></td>
-                            <td onclick="function1(this)" th:text="${w1MonA}"></td>
-                            <td onclick="function1(this)" th:text="${w1TuesA}"></td>
-                            <td onclick="function1(this)" th:text="${w1WedsA}"></td>
-                            <td onclick="function1(this)" th:text="${w1ThurA}"></td>
-                            <td onclick="function1(this)" th:text="${w1FriA}"></td>
-                            <td onclick="function1(this)" th:text="${w1SatA}"></td>
+                            <td id="cell11" th:onclick="|test(this, 'c11c', 'c11l', 'c11b', 'c11Bl', '${w1SunA}')|" th:text="${w1SunA}"></td>
+                            <td id="cell22" th:onclick="|test(this, 'c22c', 'c22l', 'c22b', 'c22Bl', '${w1MonA}')|" th:text="${w1MonA}"></td>
+                            <td id="cell33" th:onclick="|test(this, 'c33c', 'c33l', 'c33b', 'c33Bl', '${w1TuesA}')|" th:text="${w1TuesA}"></td>
+                            <td id="cell44" th:onclick="|test(this, 'c44c', 'c44l', 'c44b', 'c44Bl', '${w1WedsA}')|" th:text="${w1WedsA}"></td>
+                            <td id="cell55" th:onclick="|test(this, 'c55c', 'c55l', 'c55b', 'c55Bl', '${w1ThurA}')|" th:text="${w1ThurA}"></td>
+                            <td id="cell66" th:onclick="|test(this, 'c66c', 'c66l', 'c66b', 'c66Bl', '${w1FriA}')|" th:text="${w1FriA}"></td>
+                            <td id="cell77" th:onclick="|test(this, 'c77c', 'c77l', 'c77b', 'c77Bl', '${w1SatA}')|" th:text="${w1SatA}"></td>
                         </tr>
                     </table>
-                </div>
-                    <div class = "container btn-group-vertical" role="group">
-                        <form action="/Neurology/1" >
-                            <input type="submit" value="Neurology" id="1" />
-                        </form>
-                        <form action="/Family Medicine/2">
-                            <input type="submit" value="Family Doc" id="2"/>
-                        </form>
-                        <form action="/Internal Medicine/3">
-                            <input type="submit" value="Internal Medicine" id="3" />
-                        </form>
-                        <form action="/Surgery/4">
-                            <input type="submit" value="Surgery" id="4" />
-                        </form>
-                        <form action="/ER/5">
-                            <input type="submit" value="ER" id="5"/>
-                        </form>
-                        <form action="/OBGYN/6">
-                            <input type="submit" value="OBGYN" id="6"/>
-                        </form>
-                        <form action="/Pediatrics/7">
-                            <input type="submit" value="Pediatrics" id="7"/>
-                        </form>
-                        <form action="/Phychiatry/8">
-                            <input type="submit" value="Phychiatry" id="8"/>
-                        </form>
-                        <form action="/IM Sub-Specialty/9">
-                            <input type="submit" value="IM Sub-Specialty" id="9"/>
-                        </form>
-                    </div>
-                <div class = "container"> <h1 class="text-center"><small>Week 2</small></h1>
-                    <table>
+                    <h5>Week 2</h5>
+                    <table class="table table-dark table-striped">
                         <tr>
                             <th>&nbsp;</th>
                             <th> Sun</th>
@@ -164,10 +168,128 @@
                             <td th:text="${w2SatA}"></td>
                         </tr>
                     </table>
-                </div> 
-        </div>
-        <div class = "container" style="position:relative; left:835px;">
-                <button type ="button" class= "btn btn-default btn-lg" >Submit</button>
+                </div>
+                <div class="col-3" id="specialty-column">
+                    <p class="text-center" id="button-header"><strong>Choose Clerkship</strong></p>
+                    <div class = "container btn-group-vertical" role="group">
+                        <form action="/Neurology/1" >
+                            <input style="width: 250px" class="btn btn-dark" type="submit" value="Neurology" id="1" />
+                        </form>
+                        <form action="/Family Medicine/2">
+                            <input style="width: 250px" class="btn btn-dark" type="submit" value="Family Doc" id="2"/>
+                        </form>
+                        <form action="/Internal Medicine/3">
+                            <input style="width: 250px" class="btn btn-dark" type="submit" value="Internal Medicine" id="3" />
+                        </form>
+                        <form action="/Surgery/4">
+                            <input style="width: 250px" class="btn btn-dark" type="submit" value="Surgery" id="4" />
+                        </form>
+                        <form action="/ER/5">
+                            <input style="width: 250px" class="btn btn-dark" type="submit" value="ER" id="5"/>
+                        </form>
+                        <form action="/OBGYN/6">
+                            <input style="width: 250px" class="btn btn-dark" type="submit" value="OBGYN" id="6"/>
+                        </form>
+                        <form action="/Pediatrics/7">
+                            <input style="width: 250px" class="btn btn-dark" type="submit" value="Pediatrics" id="7"/>
+                        </form>
+                        <form action="/Phychiatry/8">
+                            <input style="width: 250px" class="btn btn-dark" type="submit" value="Phychiatry" id="8"/>
+                        </form>
+                        <form action="/IM Sub-Specialty/9">
+                            <input  style="width: 250px" class="btn btn-dark" type="submit" value="IM Sub-Specialty" id="9"/>
+                        </form>
+
+                        <!-- Button trigger modal -->
+                        <button style="width: 250px" type="button" class="btn btn-danger" data-toggle="modal" data-target="#scheduleModal" id="schedule-popup">
+                            Schedule
+                        </button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="scheduleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Your Current Schedule</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <ul class="list-group" id="schedule-group">
+                                            <!--<li class="list-group-item" th:text="${schedule}"></li> -->
+                                            <!--<h1 id="hold" th:text="${schedule}"></h1> -->
+                                        </ul>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-danger">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button th:text="HERE" hidden id="choice"></button>
+            </div>
+            <div class="row" id="key-row">
+                <div class="col-9">
+                    <div class="card card-horizontal">
+                        <div class="card-body bg-light">
+                            <p class="card-title"><strong>Selection Key</strong></p>
+                            <p class="card-text">Each color represents a different criteria you have matched with.</p>
+                        </div>
+                        <div class="card-body bg-light">
+                            <div class="row text-center pagination-center">
+                                <div class="col-3">
+                                    <div class="square" id="personality">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <p class="key-text">Doctor with matching personality</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body bg-light">
+                            <div class="row text-center pagination-center">
+                                <div class="col-3">
+                                    <div class="square" id="na">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <p class="key-text" style="margin-left: 15px;">No matching criteria</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body bg-light">
+                            <div class="row text-center pagination-center">
+                                <div class="col-3">
+                                    <div class="square" id="location">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <p class="key-text">Doctor with matching location</p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="card-body bg-light">
+                            <div class="row text-center pagination-center">
+                                <div class="col-3">
+                                    <div class="square" id="match-both">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <p class="key-text">Matching personality & location</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
     <script th:inline="javascript">
@@ -176,20 +298,41 @@
 
        // window.onload = loadFunc;
         window.onload = checkAvail;
-        var cellColors = ['c1c','c2c','c3c','c4c','c5c','c6c','c7c'];
-        var cellLabels = ['c1l','c2l','c3l','c4l','c5l','c6l','c7l'];
-        var cellIDs = ["cell1","cell2","cell3","cell4","cell5","cell6","cell7"];
+        var cellColors = ['c1c','c2c','c3c','c4c','c5c','c6c','c7c','c11c','c22c','c33c','c44c','c55c','c66c','c77c'];
+        var cellLabels = ['c1l','c2l','c3l','c4l','c5l','c6l','c7l','c11l','c22l','c33l','c44l','c55l','c66l','c77l'];
+        var cellButtons = ['c1b','c2b','c3b','c4b','c5b','c6b','c7b','c11b','c22b','c33b','c44b','c55b','c66b','c77b'];
+        var cellIDs = ["cell1","cell2","cell3","cell4","cell5","cell6","cell7","cell11","cell22","cell33","cell44","cell55","cell66","cell77"];
+        var clerkBtns = ["1","2","3","4","5","6","7","8","9"];
 
         function checkAvail(){
-            for(i = 0; i<=7; i++){
+            for(i = 0; i<=14; i++){
                 if(sessionStorage.getItem(cellColors[i])) {
                     document.getElementById(cellIDs[i]).style.background = sessionStorage.getItem(cellColors[i]);
                     document.getElementById(cellIDs[i]).innerHTML = sessionStorage.getItem(cellLabels[i]);
-                    //document.getElementById("1").disabled = sessionStorage.cell1BtnDis;
+
+
                 }
 
             }
+            for(j = 0; j<=9; j++ ){
 
+                if(sessionStorage.getItem(clerkBtns[j]) === "off"){
+                    document.getElementById(clerkBtns[j]).disabled = true;
+                }else{
+                    document.getElementById(clerkBtns[j]).disabled = false;
+                }
+            }
+
+            var btnCount = 0;
+            for(t = 0; t<=9; t++){
+
+                if(sessionStorage.getItem(clerkBtns[j]) === "off"){
+                    btnCount += 1;
+                }
+            }
+            if(btnCount === 9){
+                window.alert("Press 'Schedule' to submit schedule!")
+            }
 
             var bool = /*[[${w1MonM}]]*/null;
             if(bool == 0){
@@ -198,67 +341,24 @@
             }
         }
 
-
-
-        function cell1func(x){
-
-            var count = /*[[${w1SunM}]]*/null;
-            var id1 = /*[[${id}]]*/null;
-            var btn = document.getElementById(id1);
-            var prof = /*[[${prof}]]*/ null;
-
-            if(sessionStorage.bool == 1) {
-
-                if (!count) {
-                    window.alert("No Doctors Available at this time!");
-                } else {
-                    window.alert("should change back")
-                    sessionStorage.cell1BtnDis = false;
-                    sessionStorage.setItem()
-                    btn.disabled = false;
-                    x.style.background = "initial";
-                    sessionStorage.cell1Color = "initial";
-                    sessionStorage.cell1Clerk = count;
-                    x.innerHTML = sessionStorage.cell1Clerk;
-                    sessionStorage.bool = 0;
-                }
-            }else{
-
-                if (!count) {
-                    window.alert("No Doctors Available at this time!");
-                } else {
-
-                    sessionStorage.cell1BtnDis = true;
-                    btn.disabled = true;
-                    x.style.background = "green";
-                    sessionStorage.cell1Color = "green";
-                    sessionStorage.cell1Clerk = prof;
-                    x.innerHTML = sessionStorage.cell1Clerk;
-                    sessionStorage.bool = 1;
-
-
-                }
-            }
-        }
-
-
-
-        function test(x,cellColor,cellLabel,cellBtn,cellBool,y){
-
+        function test(x,cellColor,cellLabel,cellBtn,cellBool,y,row,col){
+            var table = document.getElementById("table1");
+            //window.alert(table.rows[row].cells[col].innerHTML);
             var count = y;
             var id1 = /*[[${id}]]*/null;
             var btn = document.getElementById(id1);
             var prof = /*[[${prof}]]*/ null;
-            window.alert(count);
+            //window.alert(count);
             if(sessionStorage.getItem(cellBool) == '1') {
 
-                if (!count) {
+                if (count === 0) {
                     window.alert("No Doctors Available at this time!");
                 } else {
-                    window.alert("should change back")
+                    //window.alert("should change back")
                     //sessionStorage.setItem(cellBtn, false);
                     btn.disabled = false;
                     x.style.background = "initial";
+                    sessionStorage.setItem(id1, "on");
                     sessionStorage.setItem(cellColor,"initial");
                     sessionStorage.setItem(cellLabel, count);
                     x.innerHTML = sessionStorage.getItem(cellLabel);
@@ -266,13 +366,14 @@
                 }
             }else{
 
-                if (!count) {
+                if (count === 0) {
                     window.alert("No Doctors Available at this time!");
                 } else {
 
                     //sessionStorage.cell1BtnDis = true;
                     btn.disabled = true;
                     x.style.background = "green";
+                    sessionStorage.setItem(id1, "off");
                     sessionStorage.setItem(cellColor,"green");
                     sessionStorage.setItem(cellLabel, prof);
                     x.innerHTML = sessionStorage.getItem(cellLabel);
