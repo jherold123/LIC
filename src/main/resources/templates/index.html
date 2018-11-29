@@ -72,7 +72,10 @@
             <div th:text="${stu.getEmail()}"></div>
         </div>
         <div class="wrapper">
-                <div style="overflow-x:auto;" class = "container"> <h1 class="text-center"><small>Week 1</small></h1>
+            <div class = "row">
+
+                <div style="overflow-x:auto;" class = "container">
+                    <h1 class="text-center"><small>Week 1</small></h1>
                     <table>
                         <tr>
                             <th>&nbsp;</th>
@@ -106,35 +109,6 @@
                         </tr>
                     </table>
                 </div>
-                    <div class = "container btn-group-vertical" role="group">
-                        <form action = "#" th:action="@{/{path}/Neurology(path=${stu.getId()})}"  >
-                            <input type="submit" value="Neurology" id="Neurology"/>
-                        </form>
-                        <form action = "#" th:action="@{/{path}/Family Medicine(path=${stu.getId()})}" >
-                            <input type="submit" value="Family Medicine" id="Family Medicine"/>
-                        </form>
-                        <form action = "#" th:action="@{/{path}/Internal Medicine(path=${stu.getId()})}" >
-                            <input type="submit" value="Internal Medicine" id="Internal Medicine"/>
-                        </form>
-                        <form action = "#" th:action="@{/{path}/Surgery(path=${stu.getId()})}" >
-                            <input type="submit" value="Surgery" id="Surgery"/>
-                        </form>
-                        <form action = "#" th:action="@{/{path}/ER(path=${stu.getId()})}" >
-                            <input type="submit" value="ER" id="ER"/>
-                        </form>
-                        <form action = "#" th:action="@{/{path}/OBGYN(path=${stu.getId()})}" >
-                            <input type="submit" value="OBGYN" id="OBGYN"/>
-                        </form>
-                        <form action = "#" th:action="@{/{path}/Pediatrics(path=${stu.getId()})}" >
-                            <input type="submit" value="Pediatrics" id="Pediatrics"/>
-                        </form>
-                        <form action = "#" th:action="@{/{path}/Phychiatry(path=${stu.getId()})}" >
-                            <input type="submit" value="Phychiatry" id="Phychiatry"/>
-                        </form>
-                        <form action = "#" th:action="@{/{path}/IM Sub-Specialty(path=${stu.getId()})}" >
-                            <input type="submit" value="IM Sub-Specialty" id="IM Sub-Specialty"/>
-                        </form>
-                    </div>
                 <div class = "container"> <h1 class="text-center"><small>Week 2</small></h1>
                     <table>
                         <tr>
@@ -168,11 +142,47 @@
                             <td id="cell28" onclick="cell28(this)" th:text="${count[27]}"></td>
                         </tr>
                     </table>
-                </div> 
-        </div>
-        <div class = "container" style="position:relative; left:835px;">
+                </div>
+            </div>
+                <div class = "row">
+                    <div class = "container btn-group-vertical" role="group">
+                        <form action = "#" th:action="@{/{path}/Neurology(path=${stu.getId()})}"  >
+                            <input type="submit" value="Neurology" id="Neurology"/>
+                        </form>
+                        <form action = "#" th:action="@{/{path}/Family Medicine(path=${stu.getId()})}" >
+                            <input type="submit" value="Family Medicine" id="Family Medicine"/>
+                        </form>
+                        <form action = "#" th:action="@{/{path}/Internal Medicine(path=${stu.getId()})}" >
+                            <input type="submit" value="Internal Medicine" id="Internal Medicine"/>
+                        </form>
+                        <form action = "#" th:action="@{/{path}/Surgery(path=${stu.getId()})}" >
+                            <input type="submit" value="Surgery" id="Surgery"/>
+                        </form>
+                        <form action = "#" th:action="@{/{path}/ER(path=${stu.getId()})}" >
+                            <input type="submit" value="ER" id="ER"/>
+                        </form>
+                        <form action = "#" th:action="@{/{path}/OBGYN(path=${stu.getId()})}" >
+                            <input type="submit" value="OBGYN" id="OBGYN"/>
+                        </form>
+                        <form action = "#" th:action="@{/{path}/Pediatrics(path=${stu.getId()})}" >
+                            <input type="submit" value="Pediatrics" id="Pediatrics"/>
+                        </form>
+                        <form action = "#" th:action="@{/{path}/Phychiatry(path=${stu.getId()})}" >
+                            <input type="submit" value="Phychiatry" id="Phychiatry"/>
+                        </form>
+                        <form action = "#" th:action="@{/{path}/IM Sub-Specialty(path=${stu.getId()})}" >
+                            <input type="submit" value="IM Sub-Specialty" id="IM Sub-Specialty"/>
+                        </form>
+                    </div>
+                </div>
+            <div align="center">
                 <button type ="button" class= "btn btn-default btn-lg" >Submit</button>
+
+            </div>
+
+
         </div>
+
     </div>
     <script th:inline="javascript">
 
