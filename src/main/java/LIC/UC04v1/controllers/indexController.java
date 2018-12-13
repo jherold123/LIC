@@ -12,14 +12,16 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
-
+/*
+The index controller is what we are using to send and recieve data between the front end and the back end.
+ */
 @Controller
 public class indexController {
 
     public String que = "";
 
 //Test 1
-    private DoctorRepository doctorRepository;
+    private DoctorRepository doctorRepository;//link to doctor reposotory
 
 
     public indexController(DoctorRepository doctorRepository){
@@ -42,14 +44,17 @@ public class indexController {
 
         return "index";
     }
-
+    /*
+    This method maps to webpage requests of the format /(profession)/(id)
+    We pass parameters, in string form, in the url
+     */
     @RequestMapping(path = "/{profession}/{id}")
     public String neuro(Model model, @PathVariable String profession, @PathVariable String id){
         int count = 0;
         System.out.println(profession);
         ArrayList<Doctor> AvailNeuroDocs = new ArrayList<Doctor>();
         int counts[] = new int[28];
-        for(Doctor doc: doctorRepository.findAll()){
+        for(Doctor doc: doctorRepository.findAll()){//this loop tracks how many doctors are available on certain days and times.
             if((doc.getProfession().equals(profession))){
                 for(int i = 0; i<28;i++){
                     if(doc.isAvailable().charAt(i) == '1'){
@@ -61,7 +66,7 @@ public class indexController {
                 AvailNeuroDocs.add(doc);
             }
         }
-
+        //Passing attributes to the thymeleaf front ent
         model.addAttribute("id", id);
         model.addAttribute("prof", profession);
         model.addAttribute("w1SunM", counts[0]);
@@ -97,7 +102,7 @@ public class indexController {
         return "index";
     }
 
-    @RequestMapping(path = "/joke")
+    @RequestMapping(path = "/joke")//This is a test function
     public String joke(){
         System.out.println("joke");
         return "index";

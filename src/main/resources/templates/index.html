@@ -305,14 +305,18 @@
         var clerkBtns = ["1","2","3","4","5","6","7","8","9"];
 
 
+        //Function that updates window every time it reloads
         function checkAvail(){
-            //event.preventDefault();
+
+            //iterates through each cell and updates text and color
             for(i = 0; i<=14; i++){
                 if(sessionStorage.getItem(cellColors[i])) {
-                    document.getElementById(cellIDs[i]).style.background = sessionStorage.getItem(cellColors[i]);
-                    document.getElementById(cellIDs[i]).innerHTML = sessionStorage.getItem(cellLabels[i]);
+
+                    document.getElementById(cellIDs[i]).style.background = sessionStorage.getItem(cellColors[i]); //setting background for cells
+                    document.getElementById(cellIDs[i]).innerHTML = sessionStorage.getItem(cellLabels[i]); //setting text for cells
                 }
             }
+            //turn buttons on/off
             for(j = 0; j<=9; j++ ){
 
                 if(sessionStorage.getItem(clerkBtns[j]) === "off"){
@@ -328,33 +332,34 @@
                     btnCount += 1;
                 }
             }
+            //send window alert if all clerkships selected
             if(btnCount === 9){
                 window.alert("Press 'Schedule' to submit schedule!")
             }
 
         }
 
-
+        //function gets called when a cell is selected
+        //
         function test(x,cellColor,cellLabel,cellBtn,cellBool,y,row,col){
-            //event.preventDefault();
+
             var table = document.getElementById("table1");
             var count = y;
             var id1 = /*[[${id}]]*/null;
             var btn = document.getElementById(id1);
             var prof = /*[[${prof}]]*/ null;
 
-
+            //determine whether the cell has already been selected
             if(sessionStorage.getItem(cellBool) == '1') {
 
-               /* if (count === '0') {
-                    window.alert("No Doctors Available at this time!");
-                } else {*/
+
 
                     var label = table.rows[row].cells[col].innerHTML;
+                    //if this label was selected
                     if(label == "Neurology"){
-                        sessionStorage.setItem("1", "on");
+                        sessionStorage.setItem("1", "on"); //button
                         var temp = document.getElementById("1");
-                        temp.disabled = false;
+                        temp.disabled = false; //disable button
                     }else if(label == "Family Medicine"){
                         sessionStorage.setItem("2", "on");
                         var temp = document.getElementById("2");
@@ -389,23 +394,25 @@
                         temp.disabled = false;
                     }
 
+
                     x.style.background = "initial";
-                    sessionStorage.setItem(cellColor,"initial");
-                    sessionStorage.setItem(cellLabel, count);
+                    sessionStorage.setItem(cellColor,"initial"); //set background to initial color
+                    sessionStorage.setItem(cellLabel, count); //set cell text
                     x.innerHTML = sessionStorage.getItem(cellLabel);
                     sessionStorage.setItem(cellBool, '0');
             }else{
 
+                //if no doctors are available send alert
                 if (count === '0') {
                     window.alert("No Doctors Available at this time!");
                 } else {
-                    btn.disabled = true;
+                    btn.disabled = true; //disable button
                     x.style.background = "green";
                     sessionStorage.setItem(id1, "off");
-                    sessionStorage.setItem(cellColor,"green");
+                    sessionStorage.setItem(cellColor,"green"); //set cell background to green
                     sessionStorage.setItem(cellLabel, prof);
-                    x.innerHTML = sessionStorage.getItem(cellLabel);
-                    sessionStorage.setItem(cellBool, '1');
+                    x.innerHTML = sessionStorage.getItem(cellLabel); //set cell text to current button name
+                    sessionStorage.setItem(cellBool, '1'); //boolean identifying that the cell has been pressed
                 }
             }
         }

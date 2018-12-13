@@ -1,5 +1,11 @@
 package LIC.UC04v1.Bootstrap;
 
+/*
+The bootstrap java file utilizes a pregenerated list of doctors to populate our database.
+The database is of the H2Variety as of now, but the spring framework will adapt our tables
+to a different database type upon our needs, further into the project.
+ */
+
 import LIC.UC04v1.model.Doctor;
 import LIC.UC04v1.repositories.ClerkshipRepository;
 import LIC.UC04v1.repositories.DoctorRepository;
@@ -9,12 +15,11 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 import java.io.*;
-@Component
+@Component//Bootstrap classlinks to database
 public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
     private ClerkshipRepository clerkshipRepository;
     private DoctorRepository doctorRepository;
     private StudentRepository studentRepository;
-
 
     @java.lang.Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
@@ -23,14 +28,14 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }//link to repositoriesz
     public Bootstrap(ClerkshipRepository clerkshipRepository, DoctorRepository doctorRepository, StudentRepository studentRepository) {
         this.clerkshipRepository = clerkshipRepository;
         this.doctorRepository = doctorRepository;
         this.studentRepository = studentRepository;
     }
     private void initData() throws IOException {
-        String fileName = "doctors.csv";
+        String fileName = "doctors.csv";//get csv file with generated doctors
 
         ClassLoader classLoader = super.getClass().getClassLoader();
 
@@ -38,12 +43,12 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
         BufferedReader br = null;
         try {
-            br = new BufferedReader(new FileReader(file));
+            br = new BufferedReader(new FileReader(file));//read file
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        String st;
+        String st;//read file into database on instance of doctor at a time.
         br.readLine();
         String[] values;
         while ((st = br.readLine()) != null){
