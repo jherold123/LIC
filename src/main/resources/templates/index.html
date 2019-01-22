@@ -333,6 +333,10 @@
             }
 
         }
+        function pass(){
+            location.href="http://localhost:8080/submit/"+sessionStorage.getItem("schedule");
+        }
+
 
 
         function test(x,cellColor,cellLabel,cellBtn,cellBool,y,row,col){
@@ -407,8 +411,67 @@
                     x.innerHTML = sessionStorage.getItem(cellLabel);
                     sessionStorage.setItem(cellBool, '1');
                 }
+                if (label == "Neurology") {
+                    SessionStorage.setItem("NeurologyTime", y);
+                } else if (label == "Family Medicine") {
+                    SessionStorage.setItem("FamilyDocTime", y);
+                } else if (label == "Internal Medicine") {
+                    SessionStorage.setItem("InternalMedicineTime", y);
+                } else if (label == "Surgery") {
+                    SessionStorage.setItem("SurgeryTime", y);
+                } else if (label == "ER") {
+                    SessionStorage.setItem("ERTime", y);
+                } else if (label == "OBGYN") {
+                    SessionStorage.setItem("OBGYNTime", y);
+                } else if (label == "Pediatrics") {
+                    SessionStorage.setItem("PediatracsTime", y);
+                } else if (label == "Phychiatry") {
+                    SessionStorage.setItem("PhychiatryTime", y);
+                } else if (label == "IM Sub-Specialty") {
+                    SessionStorage.setItem("IMTime", y);
+                }
             }
+            th:onclick="|pass()|"
+            schedule = "Neurology: "+sessionStorage.getItem("NeurologyTime")+" Family Medicine: "+sessionStorage.getItem("FamilyDocTmie")+
+                " IM: "+sessionStorage.getItem("InternalMedicineTime")+" Surgery: "+sessionStorage.getItem("SurgeryTime")+
+                " ER: "+sessionStorage.getItem("ERTime")+" OBGYN: "+sessionStorage("OBGYNTime")+" Pediatrics: "+
+                sessionStorage.getItem("PediatricsTime")+" Phychiatry: "+sessionStorage.getItem("PhychiatryTime")+
+                " IM: "+sessionStorage.getItem("IMTime");
+            sessionStorage.setItem("schedule",schedule);
         }
+
+        /*
+
+                    function pass(){
+                location.href="/submit/"+sessionStorage.getItem("schedule");
+            }
+            if (label == "Neurology") {
+                SessionStorage.setItem("NeurologyTime", y);
+            } else if (label == "Family Medicine") {
+                SessionStorage.setItem("FamilyDocTime", y);
+            } else if (label == "Internal Medicine") {
+                SessionStorage.setItem("InternalMedicineTime", y);
+            } else if (label == "Surgery") {
+                SessionStorage.setItem("SurgeryTime", y);
+            } else if (label == "ER") {
+                SessionStorage.setItem("ERTime", y);
+            } else if (label == "OBGYN") {
+                SessionStorage.setItem("OBGYNTime", y);
+            } else if (label == "Pediatrics") {
+                SessionStorage.setItem("PediatracsTime", y);
+            } else if (label == "Phychiatry") {
+                SessionStorage.setItem("PhychiatryTime", y);
+            } else if (label == "IM Sub-Specialty") {
+                SessionStorage.setItem("IMTime", y);
+            }
+            th:onclick="|pass()|"
+                schedule = "Neurology: "+sessionStorage.getItem("NeurologyTime")+" Family Medicine: "+sessionStorage.getItem("FamilyDocTmie")+
+                            " IM: "+sessionStorage.getItem("InternalMedicineTime")+" Surgery: "+sessionStorage.getItem("SurgeryTime")+
+                            " ER: "+sessionStorage.getItem("ERTime")+" OBGYN: "+sessionStorage("OBGYNTime")+" Pediatrics: "+
+                        sessionStorage.getItem("PediatricsTime")+" Phychiatry: "+sessionStorage.getItem("PhychiatryTime")+
+                            " IM: "+sessionStorage.getItem("IMTime");
+                sessionStorage.setItem("schedule",schedule);
+         */
 
 
 
