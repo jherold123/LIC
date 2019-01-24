@@ -16,7 +16,8 @@ public class Doctor {
     private String email; //doctor email
     private String profession;
     private String available; //doctors availability (binary string)
-
+    //!! NOTE: Someone needs to explain in the comments how this binary string works!!
+    // So someone in the future is not horribly confused. DO IT OR ELSE I will be sad :(
 
     //Getter and setter methods for doctor class
 
