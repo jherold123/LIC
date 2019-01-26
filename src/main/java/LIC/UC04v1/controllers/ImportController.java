@@ -31,31 +31,6 @@ public class ImportController {
     We pass parameters, in string form, in the url
      */
 
-    @RequestMapping(path = "/{file}")
-    public String docImportFile(Model model, MultipartFile file) throws IOException {
-        String fileLocation;
-        InputStream in = file.getInputStream();
-        File currDir = new File(".");
-        String path = currDir.getAbsolutePath();
-        fileLocation = path.substring(0, path.length() - 1) + file.getOriginalFilename();
-        FileOutputStream f = new FileOutputStream(fileLocation);
-        int ch = 0;
-        while ((ch = in.read()) != -1) {
-            f.write(ch);
-        }
-        f.flush();
-        f.close();
-
-
-
-        //Passing attributes to the thymeleaf front end
-            model.addAttribute("docImportMsg", "File: " + file.getOriginalFilename()
-                    + " has been uploaded successfully!");
-            model.addAttribute("stuImportMsg", "File: " + file.getOriginalFilename()
-                    + " has been uploaded successfully!");
-        return "ImportData";
-    }
-
     @RequestMapping(path = "/import-Data/{type}/{file}")
     public String docImport(Model model, @PathVariable String type, MultipartFile file) throws IOException {
         String fileLocation;
@@ -70,8 +45,6 @@ public class ImportController {
         }
         f.flush();
         f.close();
-
-
 
         //Passing attributes to the thymeleaf front end
         if (type.equals("doctors"))
