@@ -2,6 +2,18 @@ package LIC.UC04v1.controllers;
 
 import LIC.UC04v1.model.Doctor;
 import LIC.UC04v1.repositories.DoctorRepository;
+import io.micrometer.core.instrument.MultiGauge;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.aspectj.weaver.ast.Test;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,10 +22,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.io.FileOutputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
+
+
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 @Controller
 public class ImportController {
@@ -45,6 +62,30 @@ public class ImportController {
         }
         f.flush();
         f.close();
+
+        //Read in a modern .xlsx Excel file
+        if (fileLocation.endsWith(".xlsx")) {
+            XSSFWorkbook workbook = new XSSFWorkbook(file.getInputStream());
+            XSSFSheet worksheet = workbook.getSheetAt(0);
+
+            for (int i = 1; i < worksheet.getPhysicalNumberOfRows(); i++) {
+                XSSFRow row = worksheet.getRow(i);
+                System.out.println(row.getCell(0).getStringCellValue());
+                System.out.println(row.getCell(1).getStringCellValue());
+            }
+        }
+        //Read in an older .xls Excel file
+        else if (fileLocation.endsWith(".xls")) {
+            HSSFWorkbook workbookXLS = new HSSFWorkbook(file.getInputStream());
+            HSSFSheet worksheetXLS = workbookXLS.getSheetAt(0);
+
+            for (int i = 1; i < worksheetXLS.getPhysicalNumberOfRows(); i++) {
+
+                HSSFRow rowXLS = worksheetXLS.getRow(i);
+                System.out.println(rowXLS.getCell(0).getStringCellValue());
+                System.out.println(rowXLS.getCell(1).getStringCellValue());
+            }
+        }
 
         //Passing attributes to the thymeleaf front end
         if (type.equals("doctors"))
