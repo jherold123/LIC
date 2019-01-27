@@ -1,7 +1,9 @@
 package LIC.UC04v1.controllers;
 
 import LIC.UC04v1.model.Doctor;
+import LIC.UC04v1.model.Student;
 import LIC.UC04v1.repositories.DoctorRepository;
+import LIC.UC04v1.repositories.StudentRepository;
 import io.micrometer.core.instrument.MultiGauge;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -32,11 +34,24 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+/*
+    SOME NOTES ON THIS CLASS
+        This class pulls in data from an excel file. It saves the first column as a doctor/student name
+        and the second column as the doctor/student email. There are currently no checks in place to
+        make sure the excel file is formatted correctly. Additionally, blank rows may be added to the
+        database. We'll have to fix this and do extensive testing, but it works at a low fidelity!
+    If you have questions about anything, let me (Katie) know. I'll come back and clean up/comment better soon.
+ */
+
 @Controller
 public class ImportController {
 
-    public ImportController(DoctorRepository doctorRepository){
-   //     this.doctorRepository = doctorRepository;
+    private DoctorRepository doctorRepository;
+    private StudentRepository studentRepository;
+
+    public ImportController(DoctorRepository doctorRepository, StudentRepository studentRepository){
+        this.doctorRepository = doctorRepository;
+        this.studentRepository = studentRepository;
     }
 
     @GetMapping(path = "/import-Data")
@@ -70,8 +85,18 @@ public class ImportController {
 
             for (int i = 1; i < worksheet.getPhysicalNumberOfRows(); i++) {
                 XSSFRow row = worksheet.getRow(i);
-                System.out.println(row.getCell(0).getStringCellValue());
-                System.out.println(row.getCell(1).getStringCellValue());
+                if(type.equals("doctors")) {
+                    Doctor doc = new Doctor();
+                    doc.setName(row.getCell(0).getStringCellValue());
+                    doc.setEmail(row.getCell(1).getStringCellValue());
+                    doctorRepository.save(doc);
+                }
+                else if(type.equals("students")) {
+                    Student stu = new Student();
+                    stu.setName(row.getCell(0).getStringCellValue());
+                    stu.setEmail(row.getCell(1).getStringCellValue());
+                    studentRepository.save(stu);
+                }
             }
         }
         //Read in an older .xls Excel file
@@ -82,8 +107,18 @@ public class ImportController {
             for (int i = 1; i < worksheetXLS.getPhysicalNumberOfRows(); i++) {
 
                 HSSFRow rowXLS = worksheetXLS.getRow(i);
-                System.out.println(rowXLS.getCell(0).getStringCellValue());
-                System.out.println(rowXLS.getCell(1).getStringCellValue());
+                if(type.equals("doctors")) {
+                    Doctor docXLS = new Doctor();
+                    docXLS.setName(rowXLS.getCell(0).getStringCellValue());
+                    docXLS.setEmail(rowXLS.getCell(1).getStringCellValue());
+                    doctorRepository.save(docXLS);
+                }
+                else if(type.equals("students")) {
+                    Student stuXLS = new Student();
+                    stuXLS.setName(rowXLS.getCell(0).getStringCellValue());
+                    stuXLS.setEmail(rowXLS.getCell(1).getStringCellValue());
+                    studentRepository.save(stuXLS);
+                }
             }
         }
 
