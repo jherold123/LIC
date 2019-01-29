@@ -9,12 +9,13 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 </head>
-
 <body>
-<div class="container">
+    <div class="container">
 
+        <!-- breaks to make the page look a bit nicer -->
         <br><br>
 
+        <!-- two buttons for displaying either the students or doctors. -->
         <div id="view-select">
             <button class="btn btn-default" id="show-students">Students</button>
             <button class="btn btn-default" id="show-docs">Doctors</button>
@@ -22,29 +23,40 @@
 
         <br><br>
 
+        <!-- div that holds the student panels, hidden at first until user selects students button -->
         <div id="students" class="hidden">
             <div class="panel-group" id="accordionStu" role="tablist" aria-multiselectable="true"></div>
         </div>
 
-        <div id="doctors" class="hidden">
-        </div>
+        <!-- div that holds all doctor panels, seperated by 60 per div within -->
+        <div id="doctors" class="hidden"></div>
+
+    </div>
 
 
-</div>
-
+    <!-- Required jQuery and Bootstrap js files -->
 
     <!-- jQuery CDN -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 
     <!-- Latest compiled and minified Bootstrap JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+    <!-- Custom javascript used for this page, should make it its own file later -->
+
+
     <script>
 
-        //Student function creates an object similar to our model of a student in the database
+        /*
+            The following three functions create objects for student, doctor, and clerkship, similar to what is currently in the database.
+            This page currently doesn't talk to the database, so these were created for testing/making the page like it is.
+
+         */
 
         function Student(){
 
-            this.id = Math.floor((Math.random() * 100000) + 1);
+            this.id = Math.floor((Math.random() * 100000) + 1); //random ID's
             this.Name = "John Doe" + Math.floor((Math.random() * 100) + 1);
             this.email = "jdoe" + this.id + "@something.com";
             this.clerkships = [];
@@ -60,6 +72,7 @@
 
         }
 
+        // Doctor's should have a location field in database*
         function Doctor(){
 
             this.id = Math.floor((Math.random() * 100000) + 1);
@@ -70,103 +83,129 @@
 
         }
 
+        //These arrays hold all of the current doctors,students, and clerkships everytime page is loaded.
         var students = [];
         var doctors = [];
         var clerkships = [];
+
+        // pages holds the amount of pages for pagination creation
         var pages;
 
 
-        for( var i = 0; i<60; i++){
+        // createData populates student, doctor, and clerkship data with random data to use
+        function createData(){
 
-            var std = new Student();
+            for( var i = 0; i<60; i++){ // i<60 = amount of students being made
 
-            for( var j = 0; j<8; j++){
+                var std = new Student();
 
-                var doc = new Doctor();
-                var clerk = new Clerkship(std, doc, "some day and time");
+                for( var j = 0; j<8; j++){ // j<8 = 8 doctors made for each student.
 
-                std.clerkships.push(clerk);
-                doc.clerkship = clerk;
+                    var doc = new Doctor();
+                    var clerk = new Clerkship(std, doc, "some day and time");
 
-                doctors.push(doc);
-                clerkships.push(clerk);
+                    std.clerkships.push(clerk);
+                    doc.clerkship = clerk;
 
+                    doctors.push(doc); // push to doctor list
+                    clerkships.push(clerk); // push to clerkship list
+
+                }
+
+                students.push(std); // push to students list
             }
 
-            students.push(std);
         }
 
-        for( var i = 0; i<students.length; i++){
-            console.log(students[i]);
+        // populateStudents takes the list of students created and puts them on the page for viewing, meant to mimick how they would be pulled from db
 
-            $("#accordionStu").append(
+        function populateStudents(){
 
-                "<\div class=\"panel panel-default\">" + "<\div class=\"panel-heading\" role=\"tab\" id=\"heading" + students[i].id + "\">" +
-                "<\h4 class=\"panel-title\">" +
-                "<\a role=\"button\" data-toggle=\"collapse\" data-parent=\"#accordionStu\" href=\"#" + students[i].id + "\" aria-expanded=\"true\" aria-controls=\"collapseOne\">" +
-                students[i].Name +
-                "<\/a>" +
-                "<\/h4>" +
-                "<\/div>" +
-                "<\div id=\"" + students[i].id + "\" class=\"panel-collapse collapse\" role=\"tabpanel\" aria-labelledby=\"heading" + students[i].id + "\">" +
-                "<\div class=\"panel-body\">" +
-                "ID: " + students[i].id +  "<\/br> Email: " + students[i].email + "<\/br>" + clerksToString(students[i]) +
-                "<button class=\"btn btn-default\"> Edit  </button>" +
-                "<\/div>" +
-                "<\/div>" +
-                "<\/div>");
+            for( var i = 0; i<students.length; i++){
 
+                console.log(students[i]); // print student information for debugging
+
+                $("#accordionStu").append( //append to accordion that holds the panels for students in html
+
+                    // the following string is turning the students into their separate panels
+                    // the "\" are used to separate ""
+
+                    "<\div class=\"panel panel-default\">" + "<\div class=\"panel-heading\" role=\"tab\" id=\"heading" + students[i].id + "\">" +
+                    "<\h4 class=\"panel-title\">" +
+                    "<\a role=\"button\" data-toggle=\"collapse\" data-parent=\"#accordionStu\" href=\"#" + students[i].id + "\" aria-expanded=\"true\" aria-controls=\"collapseOne\">" + students[i].Name + "<\/a>" +
+                    "<\/h4>" +
+                    "<\/div>" +
+                    "<\div id=\"" + students[i].id + "\" class=\"panel-collapse collapse\" role=\"tabpanel\" aria-labelledby=\"heading" + students[i].id + "\">" +
+                    "<\div class=\"panel-body\">" +
+                    "ID: " + students[i].id +  "<\/br> Email: " + students[i].email + "<\/br>" + clerksToString(students[i]) +
+                    "<button class=\"btn btn-default\"> Edit  </button>" +
+                    "<\/div>" +
+                    "<\/div>" +
+                    "<\/div>");
+            }
         }
+
+
+
+        // createPagination finds out how many pages are needed for the doctor's within the database and creates the needed html.
 
         function createPagination(){
 
-            pages = doctors.length/60;
+            pages = doctors.length/60; // finds how many pages are needed. Each page holds 60 doctors.
 
             for( var i = 0; i<pages; i++){
-                $("#doctors").append("<\div id=\"page"+i+"\" class=\"hidden pagination-check\">" +
-                        "<div class=\"panel-group\" id=\"accordion" + i + "\" role=\"tablist\" aria-multiselectable=\"true\"></div>" +
-                    "</div>");
+                // this string creates the seperate page html to be hidden/shown on pagination
+                $("#doctors").append("<\div id=\"page"+i+"\" class=\"hidden pagination-check\">" + "<div class=\"panel-group\" id=\"accordion" + i + "\" role=\"tablist\" aria-multiselectable=\"true\"></div>" + "</div>");
             }
+
 
             $("#doctors").append("<div class=\"btn-group\" id=\"pag-group\">");
 
             for( var i = 0; i<pages; i++){
+                // this loop adds the pagination buttons.
                 $("#pag-group").append("<button type=\"button\" class=\"btn btn-primary\" id=pag" + i + ">" + (i+1) + "</button>");
             }
 
-            $("#doctors").append("</div");
+            $("#doctors").append("</div>");
 
         }
 
-        createPagination();
+        //populateDoctors is similar to populateStudents, puts doctors into corresponding pages to be viewed on the page.
 
-        var count = 0;
-        for( var i = 0; i<doctors.length; i++){
-            console.log(doctors[i]);
+        function populateDoctors(){
 
-            $("#accordion" + count).append(
+            var count = 0; //count to see which page the doctor is going on.
 
-                "<\div class=\"panel panel-default\">" + "<\div class=\"panel-heading\" role=\"tab\" id=\"heading" + doctors[i].id + "\">" +
-                "<\h4 class=\"panel-title\">" +
-                "<\a role=\"button\" data-toggle=\"collapse\" data-parent=\"#accordion" + count + "\" href=\"#" + doctors[i].id + "\" aria-expanded=\"true\" aria-controls=\"collapseOne\">" +
-                doctors[i].name +
-                "<\/a>" +
-                "<\/h4>" +
-                "<\/div>" +
-                "<\div id=\"" + doctors[i].id + "\" class=\"panel-collapse collapse\" role=\"tabpanel\" aria-labelledby=\"heading" + doctors[i].id + "\">" +
-                "<\div class=\"panel-body\">" +
-                "ID: " + doctors[i].id +  "<\/br> Email: " + doctors[i].email + "<\/br>" + "Profession: " + doctors[i].profession + " <br> Student: " + doctors[i].clerkship.std.Name + "<br>" +
-                "<button class=\"btn btn-default\"> Edit  </button>" +
-                "<\/div>" +
-                "<\/div>" +
-                "<\/div>");
+            for( var i = 0; i<doctors.length; i++){
+                console.log(doctors[i]);
 
-            if( (i % 60) == 0 && i != 0){
-                count++;
+                $("#accordion" + count).append(
+
+                    "<\div class=\"panel panel-default\">" + "<\div class=\"panel-heading\" role=\"tab\" id=\"heading" + doctors[i].id + "\">" +
+                    "<\h4 class=\"panel-title\">" +
+                    "<\a role=\"button\" data-toggle=\"collapse\" data-parent=\"#accordion" + count + "\" href=\"#" + doctors[i].id + "\" aria-expanded=\"true\" aria-controls=\"collapseOne\">" +
+                    doctors[i].name +
+                    "<\/a>" +
+                    "<\/h4>" +
+                    "<\/div>" +
+                    "<\div id=\"" + doctors[i].id + "\" class=\"panel-collapse collapse\" role=\"tabpanel\" aria-labelledby=\"heading" + doctors[i].id + "\">" +
+                    "<\div class=\"panel-body\">" +
+                    "ID: " + doctors[i].id +  "<\/br> Email: " + doctors[i].email + "<\/br>" + "Profession: " + doctors[i].profession + " <br> Student: " + doctors[i].clerkship.std.Name + "<br>" +
+                    "<button class=\"btn btn-default\"> Edit  </button>" +
+                    "<\/div>" +
+                    "<\/div>" +
+                    "<\/div>");
+
+                if( (i % 60) == 0 && i != 0){ //once there is 60 doctors on a page, move to the next
+                    count++;
+                }
+
             }
 
         }
 
+
+        // clerksToString is used to reference Student's clerkships and the doctors they are with.
 
         function clerksToString(std){
             var clerks = "";
@@ -177,7 +216,23 @@
         };
 
 
+        //startPage runs all methods and begins page
+
+        function startPage(){
+            createData();
+            populateStudents();
+            createPagination();
+            populateDoctors();
+        }
+
+        startPage();
+
+
+        // this click function checks the page for the given button clicks and hides/views accordingly
+
         $("button").click(function(){
+
+            // print to console for debugging
             console.log("got a button click, check");
             var buttonClicked = this.id;
             console.log(buttonClicked);
@@ -187,28 +242,29 @@
                 $("#doctors").addClass("hidden");
 
             }
-            if( buttonClicked == "show-docs"){
+            else if( buttonClicked == "show-docs"){
                 $("#students").addClass("hidden");
                 $("#doctors").removeClass("hidden");
             }
-            for( var i = 0; i<pages; i++) {
 
-                if (buttonClicked == ("pag" + i)) {
-                    console.log("found this" + buttonClicked);
-                    $("#page"+i).removeClass("hidden");
-                }
-                else{
-                    $("#page"+i).addClass("hidden");
+            else {
+                for( var i = 0; i<pages; i++) {
 
+                    if (buttonClicked == ("pag" + i)) {
+                        console.log("found this" + buttonClicked);
+                        $("#page"+i).removeClass("hidden");
+                    }
+                    else{
+                        $("#page"+i).addClass("hidden");
+
+                    }
                 }
             }
-
 
         });
 
 
     </script>
-
 
 </body>
 </html>
