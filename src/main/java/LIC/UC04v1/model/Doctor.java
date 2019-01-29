@@ -21,7 +21,7 @@ public class Doctor {
 
     //Getter and setter methods for doctor class
 
-    public String isAvailable() {
+    public String getAvailable() {
         return available;
     }
 
