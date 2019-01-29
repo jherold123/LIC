@@ -23,18 +23,14 @@
         <br><br>
 
         <div id="students" class="hidden">
-            <div class="panel-group" id="accordion1" role="tablist" aria-multiselectable="true"></div>
+            <div class="panel-group" id="accordionStu" role="tablist" aria-multiselectable="true"></div>
         </div>
 
         <div id="doctors" class="hidden">
-            <div class="panel-group" id="accordion2" role="tablist" aria-multiselectable="true"></div>
         </div>
 
 
-
 </div>
-
-
 
 
     <!-- jQuery CDN -->
@@ -77,9 +73,10 @@
         var students = [];
         var doctors = [];
         var clerkships = [];
+        var pages;
 
 
-        for( var i = 0; i<10; i++){
+        for( var i = 0; i<60; i++){
 
             var std = new Student();
 
@@ -102,11 +99,11 @@
         for( var i = 0; i<students.length; i++){
             console.log(students[i]);
 
-            $("#accordion1").append(
+            $("#accordionStu").append(
 
                 "<\div class=\"panel panel-default\">" + "<\div class=\"panel-heading\" role=\"tab\" id=\"heading" + students[i].id + "\">" +
                 "<\h4 class=\"panel-title\">" +
-                "<\a role=\"button\" data-toggle=\"collapse\" data-parent=\"#accordion1\" href=\"#" + students[i].id + "\" aria-expanded=\"true\" aria-controls=\"collapseOne\">" +
+                "<\a role=\"button\" data-toggle=\"collapse\" data-parent=\"#accordionStu\" href=\"#" + students[i].id + "\" aria-expanded=\"true\" aria-controls=\"collapseOne\">" +
                 students[i].Name +
                 "<\/a>" +
                 "<\/h4>" +
@@ -121,14 +118,37 @@
 
         }
 
+        function createPagination(){
+
+            pages = doctors.length/60;
+
+            for( var i = 0; i<pages; i++){
+                $("#doctors").append("<\div id=\"page"+i+"\" class=\"hidden pagination-check\">" +
+                        "<div class=\"panel-group\" id=\"accordion" + i + "\" role=\"tablist\" aria-multiselectable=\"true\"></div>" +
+                    "</div>");
+            }
+
+            $("#doctors").append("<div class=\"btn-group\" id=\"pag-group\">");
+
+            for( var i = 0; i<pages; i++){
+                $("#pag-group").append("<button type=\"button\" class=\"btn btn-primary\" id=pag" + i + ">" + (i+1) + "</button>");
+            }
+
+            $("#doctors").append("</div");
+
+        }
+
+        createPagination();
+
+        var count = 0;
         for( var i = 0; i<doctors.length; i++){
             console.log(doctors[i]);
 
-            $("#accordion2").append(
+            $("#accordion" + count).append(
 
                 "<\div class=\"panel panel-default\">" + "<\div class=\"panel-heading\" role=\"tab\" id=\"heading" + doctors[i].id + "\">" +
                 "<\h4 class=\"panel-title\">" +
-                "<\a role=\"button\" data-toggle=\"collapse\" data-parent=\"#accordion2\" href=\"#" + doctors[i].id + "\" aria-expanded=\"true\" aria-controls=\"collapseOne\">" +
+                "<\a role=\"button\" data-toggle=\"collapse\" data-parent=\"#accordion" + count + "\" href=\"#" + doctors[i].id + "\" aria-expanded=\"true\" aria-controls=\"collapseOne\">" +
                 doctors[i].name +
                 "<\/a>" +
                 "<\/h4>" +
@@ -141,7 +161,12 @@
                 "<\/div>" +
                 "<\/div>");
 
+            if( (i % 60) == 0 && i != 0){
+                count++;
+            }
+
         }
+
 
         function clerksToString(std){
             var clerks = "";
@@ -151,20 +176,32 @@
             return clerks;
         };
 
-        $("#show-students").click(function(){
-            console.log("got click");
 
-            $("#doctors").addClass("hidden");
-            $("#students").removeClass("hidden");
+        $("button").click(function(){
+            console.log("got a button click, check");
+            var buttonClicked = this.id;
+            console.log(buttonClicked);
 
+            if( buttonClicked == "show-students"){
+                $("#students").removeClass("hidden");
+                $("#doctors").addClass("hidden");
 
-        });
+            }
+            if( buttonClicked == "show-docs"){
+                $("#students").addClass("hidden");
+                $("#doctors").removeClass("hidden");
+            }
+            for( var i = 0; i<pages; i++) {
 
-        $("#show-docs").click(function(){
-            console.log("got click");
+                if (buttonClicked == ("pag" + i)) {
+                    console.log("found this" + buttonClicked);
+                    $("#page"+i).removeClass("hidden");
+                }
+                else{
+                    $("#page"+i).addClass("hidden");
 
-            $("#doctors").removeClass("hidden");
-            $("#students").addClass("hidden");
+                }
+            }
 
 
         });
