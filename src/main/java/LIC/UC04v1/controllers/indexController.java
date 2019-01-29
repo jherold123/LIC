@@ -107,4 +107,9 @@ public class indexController {
         System.out.println("joke");
         return "index";
     }
+
+    @RequestMapping(path = "/views")
+    public String views(){
+        return "views";
+    }
 }

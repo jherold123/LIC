@@ -19,6 +19,8 @@ public class Doctor {
     //!! NOTE: Someone needs to explain in the comments how this binary string works!!
     // So someone in the future is not horribly confused. DO IT OR ELSE I will be sad :(
 
+    //Doctor's will also need some type of location field?
+
     //Getter and setter methods for doctor class
 
     public String isAvailable() {
